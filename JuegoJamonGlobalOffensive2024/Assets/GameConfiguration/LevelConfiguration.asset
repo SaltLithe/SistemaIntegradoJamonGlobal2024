@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   generatedLinesAmmount: 5
   allowedGeneratedLineTypes: 0000000001000000
-  C2Active: 1
+  C2Active: 0
   drumsActive: 0
   lightsActive: 0
-  audienceMembersCount: 69
+  audienceMembersCount: 40

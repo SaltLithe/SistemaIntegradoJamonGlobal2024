@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class Bateria : MonoBehaviour, ISceneryElement
 {
-    [SerializeField] private Animation _animation;
+    [SerializeField] private Animator _animator;
 
     public void ReceiveInformation(SceneElementInformation info)
     {
-        _animation.Play();
+        _animator.SetTrigger("Drums");
     }
 }
