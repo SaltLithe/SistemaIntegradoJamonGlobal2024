@@ -116,7 +116,7 @@ public class GameManager : MonoBehaviour
 
         do
         {
-            _sceneryManager = GameObject.Find("ScenaryManager").GetComponent<ScenaryManager>();
+            _sceneryManager = GameObject.Find("ScenaryManager").GetComponent<SceneryManager>();
         }
         while (_sceneryManager == null);
 

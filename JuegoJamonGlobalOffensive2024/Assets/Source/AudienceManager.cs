@@ -23,6 +23,8 @@ public class AudienceManager : MonoBehaviour
     void Awake()
     {
         //GenerateAudience(_audienceMembersCount);
+        GameManager.Exit += Exit;
+        GameManager.Laugh += Laugh;
     }
     // Start is called before the first frame update
     void Start()
@@ -52,6 +54,8 @@ public class AudienceManager : MonoBehaviour
     private void OnDestroy()
     {
         //TODO unsuscribe
+        GameManager.Exit -= Exit;
+        GameManager.Laugh -= Laugh;
     }
 
     //Salen tantos miembros del publico como pongas en el audienceMembersCount
@@ -114,7 +118,7 @@ public class AudienceManager : MonoBehaviour
        
     }
 
-    private int Exit (float currentHealh)
+    private void Exit (float currentHealh)
     {
         if (_audienceMembers.Count != 0 && currentHealh > _healthZeroMargin)
         {
@@ -130,7 +134,7 @@ public class AudienceManager : MonoBehaviour
                 toDestroy.GetComponent<AudienceMember>().ExitAudience();
             }
 
-            return _audienceMembers.Count;
+           
         }
         else if (currentHealh <= _healthZeroMargin)
         {
@@ -140,13 +144,9 @@ public class AudienceManager : MonoBehaviour
                 _audienceMembers.Remove(exitCandidate);
                 toDestroy.GetComponent <AudienceMember>().ExitAudience();
             }
-            return 0; 
-        }
-        else
-        {
-            return 0;
-        }
         
+        }
+     
     }
 
   
