@@ -26,7 +26,6 @@ public class PanelControl : MonoBehaviour
     [SerializeField] private GameObject _lineUIPrefabP1;
     [SerializeField] private GameObject _lineUIPrefabP2;
     [SerializeField] private GameObject _batteryEventPrefab;
-    [SerializeField] private GameObject _positPrefab;
     [SerializeField] private Transform _telePrompterLinesParent;
     [SerializeField] private Transform _canvasParent;
 
@@ -76,18 +75,23 @@ public class PanelControl : MonoBehaviour
 
         if (!c2Active)
         {
-            Instantiate(_positPrefab, _canvasParent).transform.position = _microfonoButtonP2.transform.position;
-            Instantiate(_positPrefab, _canvasParent).transform.position = _lightStopP2.transform.position; ;
+            _microfonoButtonP2.interactable = false;
+            _lightLeftP2.interactable = false;
+            _lightStopP2.interactable = false;
+            _lightRightP2.interactable = false;
+            _lightLeftP2.interactable = false;
         }
 
         if (!bateriaActive)
         {
-            Instantiate(_positPrefab, _canvasParent).transform.position = _bateriaButton.transform.position;
+            _bateriaButton.interactable = false;
         }
 
         if (!lightsActive)
         {
-            Instantiate(_positPrefab, _canvasParent).transform.position = _lightStopP1.transform.position;
+            _lightLeftP1.interactable = false;
+            _lightStopP1.interactable = false;
+            _lightRightP1.interactable = false;
         }
 
         GetLines();
@@ -214,10 +218,13 @@ public class PanelControl : MonoBehaviour
                 batEventUI.transform.localPosition = new Vector3((float)positionPercentaje * width, 0, 0);
             }
 
-            if (aux > 0) lineUI.transform.localScale *= .9f;
-            else
+            if (aux == 0)
             {
                 _currentLineSlider = lineUI.transform.GetChild(0).GetComponent<Slider>();
+            }else
+            {
+                lineUI.transform.localScale *= 1f + 0.2f * aux;
+                lineUI.transform.GetChild(0).GetChild(0).GetComponent<Image>().color -= new Color(.1f * aux, .1f * aux, .1f * aux, 0);
             }
             aux++;
         }
