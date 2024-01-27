@@ -15,6 +15,11 @@ public class LineManager : MonoBehaviour
     [SerializeField]
     List<Line> _scriptedLines;
 
+    private void Awake()
+    {
+        _lines = new Stack<Line>();
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -50,21 +55,31 @@ public class LineManager : MonoBehaviour
                     comedian1 = false;
                 }
             }
-            lines.Add(new Line(randomLineType, eventStamp, _lineDuration, comedian1));
+            lines.Add(new Line(randomLineType, _lineDuration, eventStamp, comedian1));
         }
         ShuffleLines(lines);
         foreach (Line line in lines)
         {
             _lines.Push(line);
         }
-        foreach (Line line in _scriptedLines)
+
+        if (_scriptedLines != null)
         {
-            _lines.Push(line);
+            foreach (Line line in _scriptedLines)
+            {
+                _lines.Push(line);
+            }
         }
+
     }
 
     public List<Line> GetLines(int numLines)
     {
+        if (numLines > _lines.Count)
+        {
+            numLines = _lines.Count;
+        }
+
         List<Line> lines = new List<Line>();
         Stack<Line> stack = new Stack<Line>();
         Line line = null;

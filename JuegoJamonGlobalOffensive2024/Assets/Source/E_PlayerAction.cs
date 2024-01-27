@@ -2,5 +2,8 @@
 public enum PlayerAction
 {
     Battery,
-    Microphone
+    P1Microphone,
+    P2Microphone,
+    P1MoveLight,
+    P2MoveLight
 }
