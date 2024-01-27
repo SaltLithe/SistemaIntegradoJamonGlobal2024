@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -7,11 +8,20 @@ public class AudienceManager : MonoBehaviour
 {
     public GameObject _audienceMemberPrefab;
     public BoxCollider _spawnBounds;
-    public int _audienceMembersCount = 20; 
+    public int _audienceMembersCount = 20;
+    private int _nextId = -1;
+    private Dictionary<int, GameObject> _audienceMembers = new Dictionary<int, GameObject>();
+    public System.Random rnd = new System.Random();
 
+    private float lastHealthDEBUG = 1;
+    private float _lastHealthUpdate = 1;
+    private float _lastAccumulation = 0;
+
+    public float _healthZeroMargin = 0.05f; 
     void Awake()
     {
         GenerateAudience(_audienceMembersCount);
+   
        
     }
     // Start is called before the first frame update
@@ -22,10 +32,29 @@ public class AudienceManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //REMOVE ON PRODUCTION
+        if (Input.GetKeyDown(KeyCode.A)) 
+        {
+            float random = (float)rnd.NextDouble();
+            lastHealthDEBUG = random; 
+            Laugh(random);
+
+        }
         
+        if(Input.GetKeyDown(KeyCode.S)) 
+        {
+
+            Exit(lastHealthDEBUG);
+            lastHealthDEBUG = lastHealthDEBUG - 0.1f; 
+        }
     }
-    //Dos arrays , uno con colores y otro con numeros para cada color, si el primer elemento de tipos es rojo , y el primer
-    //elemento de audiencia es 5 , saldran 5 rojos
+
+    private void OnDestroy()
+    {
+        //TODO unsuscribe
+    }
+
+    //Salen tantos miembros del publico como pongas en el audienceMembersCount
     private void GenerateAudience(int audienceMembersCount) 
     {
         for (int i = 0; i< audienceMembersCount; i++) 
@@ -35,13 +64,17 @@ public class AudienceManager : MonoBehaviour
         }
     }
 
+    //Spawnea un miembro del publico dentro del volumen definido por el spawn
     private void SpawnAudienceMember(Vector3 nextPosition) 
     {
-
-        GameObject newLineMember = Instantiate(_audienceMemberPrefab, nextPosition, Quaternion.identity);
-        newLineMember.SetActive(true);
+        GameObject newAudienceMember = Instantiate(_audienceMemberPrefab, nextPosition, Quaternion.identity);
+        _nextId++;
+        newAudienceMember.GetComponent<AudienceMember>().SetId(_nextId); 
+        newAudienceMember.SetActive(true); 
+        _audienceMembers.Add(_nextId, newAudienceMember);
     }
 
+    //Genera una posición aleatoria para spawnear a cada miembro del publico , cuidado que colisionan entre ellos y si son muchos la liamos
     private Vector3 GenNextPosition() 
     {
         float offsetX = Random.Range(_spawnBounds.transform.position.x-(_spawnBounds.transform.localScale.x/2), _spawnBounds.transform.position.x + (_spawnBounds.transform.localScale.x / 2));
@@ -49,4 +82,70 @@ public class AudienceManager : MonoBehaviour
         return new Vector3(offsetX,2, offsetZ);
     }
 
+    //set on awake
+    //GameManager.nombreEvento += Laugh
+    //UNSUBSCRIBE ON ONDESTROY
+
+    private List<int> GenerateRandomActions (int actionCount, List<int> keylist) 
+    {
+        List<int> randomActions = new List<int>(); 
+
+        for (int i = 0; i < actionCount; i++) 
+        {
+            int nextkey = rnd.Next(0, keylist.Count);
+            randomActions.Add(keylist[nextkey]);
+            keylist.RemoveAt(nextkey);
+        }
+
+        return randomActions;
+    }
+
+    private void Laugh (float laughPercent) 
+    {
+        int laughCount = (int)Mathf.Floor(_audienceMembers.Count * laughPercent);
+        List<int> randomLaughs = GenerateRandomActions(laughCount, _audienceMembers.Keys.ToList());
+
+        foreach (int laughCandidate in randomLaughs) 
+        {
+            _audienceMembers[laughCandidate].GetComponent<AudienceMember>().Laugh(); 
+        }
+       
+    }
+
+    private int Exit (float currentHealh)
+    {
+        if (_audienceMembers.Count != 0 && currentHealh > _healthZeroMargin)
+        {
+            float exitPercentage = _lastHealthUpdate - currentHealh + _lastAccumulation;
+            _lastHealthUpdate = currentHealh;
+            int exitCount = (int)Mathf.Floor(_audienceMembers.Count * exitPercentage);
+            List<int> randomExits = GenerateRandomActions(exitCount, _audienceMembers.Keys.ToList());
+
+            foreach (int exitCandidate in randomExits)
+            {
+                var toDestroy = _audienceMembers[exitCandidate];
+                _audienceMembers.Remove(exitCandidate);
+                toDestroy.GetComponent<AudienceMember>().ExitAudience();
+            }
+
+            return _audienceMembers.Count;
+        }
+        else if (currentHealh <= _healthZeroMargin)
+        {
+            foreach (int exitCandidate in _audienceMembers.Keys.ToList())
+            {
+                var toDestroy = _audienceMembers[exitCandidate];
+                _audienceMembers.Remove(exitCandidate);
+                toDestroy.GetComponent <AudienceMember>().ExitAudience();
+            }
+            return 0; 
+        }
+        else
+        {
+            return 0;
+        }
+        
+    }
+
+  
 }
