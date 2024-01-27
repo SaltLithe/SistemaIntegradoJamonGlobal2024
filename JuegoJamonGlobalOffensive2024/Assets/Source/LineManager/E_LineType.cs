@@ -4,11 +4,7 @@ using UnityEngine;
 
 public enum E_LineType
 {
-    RED,
-    GREEN,
-    BLUE,
-    PURPLE,
-    YELLOW,
-    BLACK,
-    NEUTRAL
+    NO_EVENT,
+    MUTE,
+    DRUMS
 }

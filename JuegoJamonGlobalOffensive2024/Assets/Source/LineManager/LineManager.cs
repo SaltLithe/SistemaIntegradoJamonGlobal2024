@@ -26,7 +26,9 @@ public class LineManager : MonoBehaviour
     public void GenerateLines(int numLines, List<E_LineType> disabledLineTypes, bool doubleComedian)
     {
         List<Line> lines = new List<Line>();
-
+        Array values = Enum.GetValues(typeof(E_LineType));
+        System.Random random = new System.Random();
+        E_LineType randomBar = (E_LineType)values.GetValue(random.Next(values.Length));
     }
 
     public List<Line> GetLines()
