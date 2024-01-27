@@ -27,6 +27,11 @@ public class SceneryManager : MonoBehaviour
         _canUseC1 = canUseC1;
         _canUseC2 = canUseC2;
 
+        if (!canUseC2) 
+        {
+            _c2Object.gameObject.SetActive(false);
+        }
+
         StopAllCoroutines();
         StartCoroutine(TriggerRandomSceneEvents());
     }
