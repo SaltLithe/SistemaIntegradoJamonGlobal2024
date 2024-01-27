@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
     private float _life;
 
     public static event Action<float> Exit;
+    public static event Action<float> Laugh;
 
     [SerializeField]
     private static Stack<LevelConfiguration> _levelConfigurations;
@@ -43,7 +44,7 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //InitLevel();
+        InitLevel();
         _fadeToBlackCanvas.GetComponent<FadeToBlack>().ActivateFade(true, _fadeDuration, 0);
     }
 
@@ -52,7 +53,7 @@ public class GameManager : MonoBehaviour
     {
         if(_life <= 0)
         {
-
+            FinishLevelFail();
         }
     }
 
@@ -64,6 +65,11 @@ public class GameManager : MonoBehaviour
             _life = 0;
         }
         Exit?.Invoke(_life);
+    }
+
+    public void PlayerSuccess()
+    {
+        Laugh?.Invoke(UnityEngine.Random.Range((float)0.7, 1));
     }
 
     public void LoadLevelConfig(LevelConfiguration config)

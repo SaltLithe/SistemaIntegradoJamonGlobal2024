@@ -6,5 +6,5 @@ public enum E_LineType
 {
     NO_EVENT,
     MUTE,
-    DRUMS
+    DRUMS 
 }

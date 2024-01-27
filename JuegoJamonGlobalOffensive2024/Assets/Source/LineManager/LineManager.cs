@@ -26,7 +26,7 @@ public class LineManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+         
     }
 
     public void GenerateLines(int numLines, List<E_LineType> disabledLineTypes, bool doubleComedian)

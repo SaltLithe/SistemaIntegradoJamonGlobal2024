@@ -15,7 +15,7 @@ public class Line
         this._eventStamp = eventStamp;
         this._duration = duration;
         this._comedian1 = comedian1;
-    }
+    } 
 
     public E_LineType GetLineType() {  return _type; }
 

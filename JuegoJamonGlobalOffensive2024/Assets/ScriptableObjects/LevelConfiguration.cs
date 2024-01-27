@@ -18,5 +18,4 @@ public class LevelConfiguration : ScriptableObject
     public bool GetC2Active() {  return C2Active;}
     public bool GetDrumsActive() {  return drumsActive;} 
     public bool GetLightsActive() {  return lightsActive; }
-
 }
