@@ -69,9 +69,8 @@ public class PanelControl : MonoBehaviour
         OnPlayerAction?.Invoke(PlayerAction.Parafernalia, null);
     }
 
-    private void Start()
+    public void Init()
     {
-        _lineManager.GenerateLines(20, new List<E_LineType>() { E_LineType.NO_EVENT, E_LineType.MUTE, E_LineType.DRUMS}, true);
         GetLines();
     }
 
@@ -151,7 +150,7 @@ public class PanelControl : MonoBehaviour
         var aux = 0;
         foreach (Line line in lines)
         {
-            var lineUI = Instantiate(_lineUIPrefabP1, _telePrompterLinesParent);
+            var lineUI = Instantiate(line.IsComedian1() ? _lineUIPrefabP1 : _lineUIPrefabP2, _telePrompterLinesParent);
 
             if (line.GetLineType() == E_LineType.MUTE)
             {
@@ -173,7 +172,7 @@ public class PanelControl : MonoBehaviour
 
             if (line.GetLineType() == E_LineType.DRUMS)
             {
-                var width = lineUI.GetComponent<RectTransform>().rect.width;
+                var width = lineUI.transform.GetChild(0).GetComponent<RectTransform>().rect.width;
                 var positionPercentaje = line.GetEventStamp() / line.GetDuration();
 
                 var batEventUI = Instantiate(_batteryEventPrefab, lineUI.transform);
@@ -263,6 +262,7 @@ public class PanelControl : MonoBehaviour
     private void CheckBattery()
     {
         if (_currentLinePercentage < 1) return;
+        if (_currentLine.GetLineType() != E_LineType.DRUMS) return;
 
         if (!_batteryPressedInTime) Error(_errorBateria);
     }

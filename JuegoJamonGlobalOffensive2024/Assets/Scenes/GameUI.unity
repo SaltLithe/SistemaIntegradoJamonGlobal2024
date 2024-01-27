@@ -290,9 +290,13 @@ MonoBehaviour:
   _lightRightP2: {fileID: 473537214}
   _lightStopP2: {fileID: 79170569}
   _lineUIPrefabP1: {fileID: 3297145108532011458, guid: f7d4922f2ba20064e8c8055dddf8c9aa, type: 3}
-  _lineUIPrefabP2: {fileID: 3297145108532011458, guid: f7d4922f2ba20064e8c8055dddf8c9aa, type: 3}
+  _lineUIPrefabP2: {fileID: 3297145108532011458, guid: 8984777e2896c6342b98fff869f8b834, type: 3}
   _batteryEventPrefab: {fileID: 7084177138194240268, guid: 6f9afb872fef5fb47a6b165397b080ba, type: 3}
   _telePrompterLinesParent: {fileID: 281044266}
+  _errorParafernalia: 0
+  _errorMicrofono: 0
+  _errorBateria: 0
+  _showActive: 0
   _mic1Activated: 1
   _mic2Activated: 1
 --- !u!4 &57941919
