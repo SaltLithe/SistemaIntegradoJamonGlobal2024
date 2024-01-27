@@ -32,6 +32,8 @@ public class GameManager : MonoBehaviour
     private PanelControl _panelControl;
     private SceneryManager _sceneryManager;
 
+    public static GameManager Instance;
+
     private void Awake()
     {
         //if(!_created)
@@ -39,6 +41,7 @@ public class GameManager : MonoBehaviour
         //    DontDestroyOnLoad(this.gameObject);
         //    _created = true;
         //}
+        Instance = this;
     }
 
     // Start is called before the first frame update
@@ -77,7 +80,7 @@ public class GameManager : MonoBehaviour
             _lineManager.GenerateLines(config.GetGeneratedLinesAmmount(), config.GetAllowedLineTypes(), config.GetAllowedSecondComedian());
             _lineManager.AddScriptedLines(config.GetScriptedLines());
             _panelControl.Init(config.GetC2Active(), config.GetDrumsActive(), config.GetLightsActive());
-            // SCENARY MANAGER INITIALIZE
+            _sceneryManager.Init(config.GetLightsActive(), config.GetC2Active());
             _audienceManager.GenerateAudience(config.GetAudienceMembersCount());
     }
 
