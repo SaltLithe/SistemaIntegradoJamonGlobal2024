@@ -6,19 +6,17 @@ using UnityEngine;
 public class AudienceManager : MonoBehaviour
 {
     public GameObject _audienceMemberPrefab;
-    public BoxCollider _spawnVolume;
-
-    private Bounds _spawnBounds;
+    public BoxCollider _spawnBounds;
+    public int _audienceMembersCount = 20; 
 
     void Awake()
     {
-        //GenerateAudience(new E_LineType[] { E_LineType.RED }, new int[] { 1 });
+        GenerateAudience(_audienceMembersCount);
        
     }
     // Start is called before the first frame update
     void Start()
     {
-        _spawnBounds = _spawnVolume.bounds;
     }
 
     // Update is called once per frame
@@ -28,32 +26,27 @@ public class AudienceManager : MonoBehaviour
     }
     //Dos arrays , uno con colores y otro con numeros para cada color, si el primer elemento de tipos es rojo , y el primer
     //elemento de audiencia es 5 , saldran 5 rojos
-    private void GenerateAudience(E_LineType[] audienceColors , int[] audienceNumbers) 
+    private void GenerateAudience(int audienceMembersCount) 
     {
-        for (int i = 0; i< audienceColors.Length; i++) 
-        {
-            for(int j = 0; j < audienceNumbers[i]; j++) 
-            {
+        for (int i = 0; i< audienceMembersCount; i++) 
+        {       
                 Vector3 nextPosition = GenNextPosition();
-                SpawnAudienceMember(audienceColors[i],nextPosition);
-            }
+                SpawnAudienceMember(nextPosition);
         }
     }
 
-    private void SpawnAudienceMember(E_LineType color,Vector3 nextPosition) 
+    private void SpawnAudienceMember(Vector3 nextPosition) 
     {
-        GameObject newLineMember = new GameObject();
-        newLineMember.SetActive(false);
-        newLineMember = Instantiate(_audienceMemberPrefab, nextPosition, Quaternion.identity);
-        newLineMember.GetComponent<AudienceMember>().SetLineType(color);
+
+        GameObject newLineMember = Instantiate(_audienceMemberPrefab, nextPosition, Quaternion.identity);
         newLineMember.SetActive(true);
     }
 
     private Vector3 GenNextPosition() 
     {
-        float offsetX = Random.Range(-_spawnBounds.extents.x, _spawnBounds.extents.x);
-        float offsetZ = Random.Range(-_spawnBounds.extents.z, _spawnBounds.extents.z);
-        return new Vector3(offsetX,0, offsetZ);
+        float offsetX = Random.Range(_spawnBounds.transform.position.x-(_spawnBounds.transform.localScale.x/2), _spawnBounds.transform.position.x + (_spawnBounds.transform.localScale.x / 2));
+        float offsetZ = Random.Range(_spawnBounds.transform.position.y - (_spawnBounds.transform.localScale.y / 2), _spawnBounds.transform.position.y + (_spawnBounds.transform.localScale.y / 2));
+        return new Vector3(offsetX,2, offsetZ);
     }
 
 }
