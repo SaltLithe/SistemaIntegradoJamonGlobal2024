@@ -102,22 +102,35 @@ public class PanelControl : MonoBehaviour
     private void MoveLightP2(int direction)
     {
         OnPlayerAction?.Invoke(PlayerAction.C2MoveLight, new LightMovementInformation(direction));
+        AudioManager.Instance.PlayClickNeutral();
     }
 
     private void MoveLightP1(int direction)
     {
         OnPlayerAction?.Invoke(PlayerAction.C1MoveLight, new LightMovementInformation(direction));
+        AudioManager.Instance.PlayClickNeutral();
     }
 
     private void PressMicrofonoP1(bool value)
     {
+        if (_mic1Activated)
+            AudioManager.Instance.PlayClickOFF();
+        else
+            AudioManager.Instance.PlayClickON();
+
         _mic1Activated = !_mic1Activated;
+
         OnPlayerAction?.Invoke(PlayerAction.C1Microphone, null);
         Debug.Log("Microphone UI pressed");
     }
 
     private void PressMicrofonoP2(bool value)
     {
+        if (_mic2Activated)
+            AudioManager.Instance.PlayClickOFF();
+        else
+            AudioManager.Instance.PlayClickON();
+
         _mic2Activated = !_mic2Activated;
         OnPlayerAction?.Invoke(PlayerAction.C2Microphone, null);
         Debug.Log("Microphone UI pressed");
@@ -147,6 +160,7 @@ public class PanelControl : MonoBehaviour
         }
 
         OnPlayerAction?.Invoke(PlayerAction.Battery, null);
+        AudioManager.Instance.PlayDrums();
     }
 
     private void GetLines()
