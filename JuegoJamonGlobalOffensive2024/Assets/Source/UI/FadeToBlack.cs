@@ -27,21 +27,30 @@ public class FadeToBlack : MonoBehaviour
         float timePassed = Time.time - _initTime;
         if (_fading)
         {
-            _color.a += Time.deltaTime/_fadeDuration * _fadeDirection;
-            if(timePassed >= _fadeDuration)
+            _color.a = Mathf.MoveTowards(_color.a, _fadeDirection, _fadeDuration * Time.deltaTime);
+            _image.color = _color;
+
+            if (_color.a == _fadeDirection)
             {
                 _fading = false;
-                if(_fadeDirection == 1) 
-                { 
-                    _color.a = 1; 
-                }
-                else 
-                {  
-                    _color.a = 0; 
-                }
-                _fadeDirection = 0;
             }
+
+            //_color.a += Time.deltaTime/_fadeDuration * _fadeDirection;
+            //if(timePassed >= _fadeDuration)
+            //{
+            //    _fading = false;
+            //    if(_fadeDirection == 1) 
+            //    { 
+            //        _color.a = 1; 
+            //    }
+            //    else 
+            //    {  
+            //        _color.a = 0; 
+            //    }
+            //    _fadeDirection = 0;
+            //}
         }
+
     }
 
     public void ActivateFade(bool fading, float duration, int direction)
