@@ -2,6 +2,11 @@ using UnityEngine;
 using System.Collections.Generic;
 using System.Collections;
 
+
+
+public enum Character{MrK, Cass, Delilah}
+
+
 public class AudioManager : MonoBehaviour
 {
     private static AudioManager instance;
@@ -45,6 +50,7 @@ public class AudioManager : MonoBehaviour
     [SerializeField] AudioClip clickNeutral;
     [SerializeField] AudioClip clickON;
     [SerializeField] AudioClip clickOFF;
+    int mrKCount = 0;
     [SerializeField] List<AudioClip> mrKVoices;
     [SerializeField] List<AudioClip> delilahVoices;
     [SerializeField] List<AudioClip> cassVoices;
@@ -104,7 +110,40 @@ public class AudioManager : MonoBehaviour
         //PlayWithFadeIn(clickOFF, 0.1f);
     }
 
-    public void PlayVoice() { }
+    public void PlayVoice(Character character) {
+        switch (character)
+        {
+            case Character.MrK:
+                if (mrKCount <= mrKVoices.Count)
+                    voicesSource.clip = mrKVoices[mrKCount++];
+                else
+                    Debug.Log("No quedan dialogos para mrK / mrKVoices se pasa de rango");
+                break;
+            case Character.Cass:
+                int randomCassVoice = Random.Range(0, cassVoices.Count);
+                voicesSource.clip = cassVoices[randomCassVoice];
+                break;
+            case Character.Delilah: 
+                int randomDelVoice = Random.Range(0, delilahVoices.Count);
+                voicesSource.clip = delilahVoices[randomDelVoice];
+                break;
+            default:
+                voicesSource.clip = null;
+                Debug.Log("Personaje no reconocido");
+                break;
+            
+        }
+        
+        if(voicesSource && voicesSource.clip)
+        {
+            voicesSource.Play();
+        }
+        else
+        {
+            Debug.Log("Algo pasa con las voces");
+        }
+            
+    }
     public void StopVoice() {
         if(voicesSource && voicesSource.clip)voicesSource.Stop();
     }
