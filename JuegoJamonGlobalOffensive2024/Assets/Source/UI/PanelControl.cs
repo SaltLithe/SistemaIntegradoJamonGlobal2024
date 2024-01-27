@@ -54,12 +54,6 @@ public class PanelControl : MonoBehaviour
         _lightStopP2.onValueChanged.RemoveAllListeners();
     }
 
-    private void Start()
-    {
-        _lineManager.GenerateLines(20, new List<E_LineType>() { E_LineType.NO_EVENT, E_LineType.MUTE }, false);
-        Init(false, false, false);
-    }
-
     private void ParafernaliaPressed()
     {
         _showActive = true;
@@ -182,6 +176,7 @@ public class PanelControl : MonoBehaviour
         if (lines.Count() == 0) 
         {
             Debug.Log("Finish Level");
+            GameManager.Instance.FinishLevelWin();
             return;
         }
 
@@ -310,10 +305,12 @@ public class PanelControl : MonoBehaviour
     private void Error(float errorAmmount)
     {
         Debug.Log("Player Mistake");
+        GameManager.Instance.PlayerError(errorAmmount);
     }
 
     private void Success()
     {
         Debug.Log("Player Success");
+        GameManager.Instance.PlayerSuccess();
     }
 }
