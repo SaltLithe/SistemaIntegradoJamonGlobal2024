@@ -1,6 +1,7 @@
 
 public enum PlayerAction
 {
+    Parafernalia,
     Battery,
     P1Microphone,
     P2Microphone,

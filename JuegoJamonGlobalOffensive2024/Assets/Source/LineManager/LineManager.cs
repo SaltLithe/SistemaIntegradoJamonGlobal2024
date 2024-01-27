@@ -12,9 +12,6 @@ public class LineManager : MonoBehaviour
     [SerializeField]
     private double _lineDuration;
 
-    [SerializeField]
-    List<Line> _scriptedLines;
-
     private void Awake()
     {
         _lines = new Stack<Line>();
@@ -46,14 +43,11 @@ public class LineManager : MonoBehaviour
             {
                 randomLineType = (E_LineType)values.GetValue(random.Next(values.Length));
             } while (!disabledLineTypes.Contains(randomLineType));
-            eventStamp = random.NextDouble() * _lineDuration;
+            eventStamp = Mathf.Clamp((float)(random.NextDouble() * _lineDuration), 0, (float)_lineDuration);
             if(doubleComedian)
             {
-                int randomInt = random.Next(0, 1);
-                if(randomInt == 0)
-                {
-                    comedian1 = false;
-                }
+                int randomInt = random.Next(0, 2);
+                comedian1 = randomInt == 0;
             }
             lines.Add(new Line(randomLineType, _lineDuration, eventStamp, comedian1));
         }
@@ -63,14 +57,18 @@ public class LineManager : MonoBehaviour
             _lines.Push(line);
         }
 
-        if (_scriptedLines != null)
+    }
+
+    public void AddScriptedLines(List<Line> scriptedLines)
+    {
+        if (scriptedLines != null)
         {
-            foreach (Line line in _scriptedLines)
+            scriptedLines.Reverse();
+            foreach (Line line in scriptedLines)
             {
                 _lines.Push(line);
             }
         }
-
     }
 
     public List<Line> GetLines(int numLines)
@@ -110,5 +108,10 @@ public class LineManager : MonoBehaviour
             lines[k] = lines[n];
             lines[n] = value;
         }
+    }
+
+    public void ResetLines()
+    {
+        _lines = new Stack<Line>();
     }
 }

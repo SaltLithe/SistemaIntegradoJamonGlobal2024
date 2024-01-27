@@ -25,15 +25,24 @@ public class PanelControl : MonoBehaviour
 
     [SerializeField] private GameObject _lineUIPrefabP1;
     [SerializeField] private GameObject _lineUIPrefabP2;
+    [SerializeField] private GameObject _batteryEventPrefab;
+    [SerializeField] private GameObject _positPrefab;
     [SerializeField] private Transform _telePrompterLinesParent;
+    [SerializeField] private Transform _canvasParent;
+
+    [SerializeField] private float _errorParafernalia;
+    [SerializeField] private float _errorMicrofono;
+    [SerializeField] private float _errorBateria;
 
     [Header("Info")]
+    [SerializeField] bool _showActive = false;
     [SerializeField] bool _mic1Activated = false;
     [SerializeField] bool _mic2Activated = false;
 
 
     private void Awake()
     {
+        _parafernaliaButton.onClick.RemoveAllListeners();
         _microfonoButtonP1.onValueChanged.RemoveAllListeners();
         _microfonoButtonP2.onValueChanged.RemoveAllListeners();
         _bateriaButton.onClick.RemoveAllListeners();
@@ -43,21 +52,50 @@ public class PanelControl : MonoBehaviour
         _lightLeftP2.onValueChanged.RemoveAllListeners();
         _lightRightP2.onValueChanged.RemoveAllListeners();
         _lightStopP2.onValueChanged.RemoveAllListeners();
-
-        _microfonoButtonP1.onValueChanged.AddListener(PressMicrofonoP1);
-        _microfonoButtonP2.onValueChanged.AddListener(PressMicrofonoP2);
-        _bateriaButton.onClick.AddListener(PressBateria);
-        _lightLeftP1.onValueChanged.AddListener((bool value) => { if (value) MoveLightP1(-1); });
-        _lightRightP1.onValueChanged.AddListener((bool value) => { if (value) MoveLightP1(1); });
-        _lightStopP1.onValueChanged.AddListener((bool value) => { if (value) MoveLightP1(0); });
-        _lightLeftP2.onValueChanged.AddListener((bool value) => { if (value) MoveLightP2(-1); });
-        _lightRightP2.onValueChanged.AddListener((bool value) => { if (value) MoveLightP2(1); });
-        _lightStopP2.onValueChanged.AddListener((bool value) => { if (value) MoveLightP2(0); });
     }
 
     private void Start()
     {
-        _lineManager.GenerateLines(20, new List<E_LineType>() { E_LineType.NO_EVENT, E_LineType.MUTE, E_LineType.DRUMS}, false);
+        _lineManager.GenerateLines(20, new List<E_LineType>() { E_LineType.NO_EVENT, E_LineType.MUTE }, false);
+        Init(false, false, false);
+    }
+
+    private void ParafernaliaPressed()
+    {
+        _showActive = true;
+        OnPlayerAction?.Invoke(PlayerAction.Parafernalia, null);
+    }
+
+    public void Init(bool c2Active, bool bateriaActive, bool lightsActive)
+    {
+        _parafernaliaButton.onClick.AddListener(ParafernaliaPressed);
+        _microfonoButtonP1.onValueChanged.AddListener(PressMicrofonoP1);
+        if (c2Active) _microfonoButtonP2.onValueChanged.AddListener(PressMicrofonoP2);
+        if (bateriaActive) _bateriaButton.onClick.AddListener(PressBateria);
+        if (lightsActive) _lightLeftP1.onValueChanged.AddListener((bool value) => { if (value) MoveLightP1(-1); });
+        if (lightsActive) _lightRightP1.onValueChanged.AddListener((bool value) => { if (value) MoveLightP1(1); });
+        if (lightsActive) _lightStopP1.onValueChanged.AddListener((bool value) => { if (value) MoveLightP1(0); });
+        if (c2Active) _lightLeftP2.onValueChanged.AddListener((bool value) => { if (value) MoveLightP2(-1); });
+        if (c2Active) _lightRightP2.onValueChanged.AddListener((bool value) => { if (value) MoveLightP2(1); });
+        if (c2Active) _lightStopP2.onValueChanged.AddListener((bool value) => { if (value) MoveLightP2(0); });
+
+
+        if (!c2Active)
+        {
+            Instantiate(_positPrefab, _canvasParent).transform.position = _microfonoButtonP2.transform.position;
+            Instantiate(_positPrefab, _canvasParent).transform.position = _lightStopP2.transform.position; ;
+        }
+
+        if (!bateriaActive)
+        {
+            Instantiate(_positPrefab, _canvasParent).transform.position = _bateriaButton.transform.position;
+        }
+
+        if (!lightsActive)
+        {
+            Instantiate(_positPrefab, _canvasParent).transform.position = _lightStopP1.transform.position;
+        }
+
         GetLines();
     }
 
@@ -93,21 +131,28 @@ public class PanelControl : MonoBehaviour
                 _currentLineCounter < _currentLine.GetEventStamp() + .2f))
             {
                 Debug.Log("Battery pressed succesfully");
+                Success();
+                _batteryPressedInTime = true;
             }
             else
             {
-                Error();
+                Debug.Log("Battery pressed succesfullyn't");
+                Error(_errorBateria);
             }
+        }
+        else
+        {
+            Debug.Log("Battery pressed succesfullyn't");
+            Error(_errorBateria);
         }
 
         OnPlayerAction?.Invoke(PlayerAction.Battery, null);
-        Debug.Log("Battery UI pressed");
     }
 
     private void GetLines()
     {
         //GetLines
-        ShowLines(_lineManager.GetLines(3));
+        ShowLines(_lineManager.GetLines(10));
     }
 
     public void ShowLines(IEnumerable<Line> lines)
@@ -130,7 +175,7 @@ public class PanelControl : MonoBehaviour
         var aux = 0;
         foreach (Line line in lines)
         {
-            var lineUI = Instantiate(_lineUIPrefabP1, _telePrompterLinesParent);
+            var lineUI = Instantiate(line.IsComedian1() ? _lineUIPrefabP1 : _lineUIPrefabP2, _telePrompterLinesParent);
 
             if (line.GetLineType() == E_LineType.MUTE)
             {
@@ -139,15 +184,25 @@ public class PanelControl : MonoBehaviour
                 {
                     if (line.IsComedian1())
                     {
-                        img.color = aux2 > 0 ? Color.red : Color.black;
+                        img.color = aux2 > 0 ? img.color : Color.red;
                     }
                     else
                     {
-                        img.color = aux2 > 0 ? Color.blue : Color.black;
+                        img.color = aux2 > 0 ? img.color : Color.blue;
                     }
 
                     aux2++;
                 }
+            }
+
+            if (line.GetLineType() == E_LineType.DRUMS)
+            {
+                var width = lineUI.transform.GetChild(0).GetComponent<RectTransform>().rect.width;
+                var positionPercentaje = line.GetEventStamp() / line.GetDuration();
+
+                var batEventUI = Instantiate(_batteryEventPrefab, lineUI.transform);
+
+                batEventUI.transform.localPosition = new Vector3((float)positionPercentaje * width, 0, 0);
             }
 
             if (aux > 0) lineUI.transform.localScale *= .9f;
@@ -164,6 +219,7 @@ public class PanelControl : MonoBehaviour
         _currentLineCounter = 0;
         _currentLinePercentage = 0;
         _micChecked = false;
+        _batteryPressedInTime = false;
 
         //Activate Line Control
         _lineControlEnabled = true;
@@ -182,8 +238,12 @@ public class PanelControl : MonoBehaviour
     double _endMicChangePercentaje = .9f;
     bool _micChecked = false;
 
+    // Battery Control
+    bool _batteryPressedInTime = false;
+
     private void Update()
     {
+        if (!_showActive) return;
         if (!_lineControlEnabled) return;
 
         _currentLineCounter += Time.deltaTime;
@@ -191,23 +251,11 @@ public class PanelControl : MonoBehaviour
 
         _currentLineSlider.value = (float)_currentLinePercentage;
 
+        //Check Mic
+        CheckMic();
 
-        if (_currentLinePercentage > _initMicChangePercentaje &&
-            _currentLinePercentage < _endMicChangePercentaje &&
-            !_micChecked)
-        {
-            _micChecked = true;
-            
-            //Check for error
-            if (_currentLine.GetLineType() == E_LineType.MUTE)
-            {
-                if (_currentLine.IsComedian1() ? _mic1Activated : _mic2Activated) Error();
-            }
-            else
-            {
-                if (_currentLine.IsComedian1() ? !_mic1Activated : !_mic2Activated) Error();
-            }
-        }
+        //CheckBattery
+        CheckBattery();
 
         if (_currentLinePercentage >= 1) // Get New Lines
         {
@@ -216,9 +264,42 @@ public class PanelControl : MonoBehaviour
         }
     }
 
+    private void CheckMic()
+    {
+        if (_currentLinePercentage > _initMicChangePercentaje &&
+            _currentLinePercentage < _endMicChangePercentaje &&
+            !_micChecked)
+        {
+            _micChecked = true;
 
-    private void Error()
+            //Check for error
+            if (_currentLine.GetLineType() == E_LineType.MUTE)
+            {
+                if (_currentLine.IsComedian1() ? _mic1Activated : _mic2Activated) Error(_errorMicrofono);
+            }
+            else
+            {
+                if (_currentLine.IsComedian1() ? !_mic1Activated : !_mic2Activated) Error(_errorMicrofono);
+            }
+        }
+    }
+
+    private void CheckBattery()
+    {
+        if (_currentLinePercentage < 1) return;
+        if (_currentLine.GetLineType() != E_LineType.DRUMS) return;
+
+        if (!_batteryPressedInTime) Error(_errorBateria);
+    }
+
+
+    private void Error(float errorAmmount)
     {
         Debug.Log("Player Mistake");
+    }
+
+    private void Success()
+    {
+        Debug.Log("Player Success");
     }
 }
