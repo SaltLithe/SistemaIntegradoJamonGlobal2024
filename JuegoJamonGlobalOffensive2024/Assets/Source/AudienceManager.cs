@@ -14,6 +14,7 @@ public class AudienceManager : MonoBehaviour
     private int _nextId = -1;
     private Dictionary<int, GameObject> _audienceMembers = new Dictionary<int, GameObject>();
     public System.Random rnd = new System.Random();
+    public float _spawnVerticalOffset = 5; 
 
     private float lastHealthDEBUG = 1;
     private float _lastHealthUpdate = 1;
@@ -85,7 +86,7 @@ public class AudienceManager : MonoBehaviour
     {
         float offsetX = Random.Range(_spawnBounds.transform.position.x-(_spawnBounds.transform.localScale.x/2), _spawnBounds.transform.position.x + (_spawnBounds.transform.localScale.x / 2));
         float offsetZ = Random.Range(_spawnBounds.transform.position.y - (_spawnBounds.transform.localScale.y / 2), _spawnBounds.transform.position.y + (_spawnBounds.transform.localScale.y / 2));
-        return new Vector3(offsetX,2, offsetZ);
+        return new Vector3(offsetX,_spawnVerticalOffset, offsetZ);
     }
 
     //set on awake
