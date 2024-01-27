@@ -26,6 +26,6 @@ public class AudienceMember : MonoBehaviour
     public void SetLineType(E_LineType lineType) 
     {
         _lineType = lineType;
-        GetComponent<MeshRenderer>().material.SetColor("_Color", ColorManager.getLineColor(lineType));
+        //GetComponent<MeshRenderer>().material.SetColor("_Color", ColorManager.getLineColor(lineType));
     }
 }
