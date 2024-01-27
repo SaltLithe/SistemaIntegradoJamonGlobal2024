@@ -9,6 +9,7 @@ public class AudienceManager : MonoBehaviour
     public GameObject _audienceMemberPrefab;
     public Transform _exitPoint; 
     public BoxCollider _spawnBounds;
+    public BoxCollider _wallBack; 
     public int _audienceMembersCount = 20;
     private int _nextId = -1;
     private Dictionary<int, GameObject> _audienceMembers = new Dictionary<int, GameObject>();
@@ -63,6 +64,8 @@ public class AudienceManager : MonoBehaviour
                 Vector3 nextPosition = GenNextPosition();
                 SpawnAudienceMember(nextPosition);
         }
+
+        _wallBack.enabled = false; 
     }
 
     //Spawnea un miembro del publico dentro del volumen definido por el spawn
