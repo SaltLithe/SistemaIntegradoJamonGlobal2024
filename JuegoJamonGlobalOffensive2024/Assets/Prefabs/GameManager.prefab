@@ -44,5 +44,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3504febc1d47ddc48b04c1fa2d10ed94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _levelConfigurationArray: []
+  _winSceneIndex: 2
+  _failSceneIndex: 3
   _fadeToBlackCanvas: {fileID: 0}
   _fadeDuration: 2
