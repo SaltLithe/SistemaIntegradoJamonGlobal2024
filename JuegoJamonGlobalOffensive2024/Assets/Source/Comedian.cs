@@ -5,12 +5,11 @@ using UnityEngine;
 public class Comedian : MonoBehaviour, ISceneryElement
 {
     [SerializeField] private List<Transform> _positions;
-    [SerializeField] private float _movementTime;
+    [SerializeField] private float _movementSpeed;
     [SerializeField] private Animation _movingAnimation;
 
     private int _currentPosition;
     private int _targetPosition;
-    [SerializeField] private float _movementSpeed;
     private bool _moving;
 
 
@@ -19,7 +18,6 @@ public class Comedian : MonoBehaviour, ISceneryElement
         _moving = false;
         _currentPosition = 0;
         _targetPosition = 0;
-        _movementSpeed = Vector3.Distance(_positions[_currentPosition].position, _positions[_targetPosition].position) / _movementTime;
     }
 
     public void ReceiveInformation(SceneElementInformation info)
@@ -29,10 +27,9 @@ public class Comedian : MonoBehaviour, ISceneryElement
         if (_targetPosition == _currentPosition)
         {
             //Do some bait
-        }
-        else
-        {
-            _movementSpeed = Vector3.Distance(_positions[_currentPosition].position, _positions[_targetPosition].position) / _movementTime;
+            var baitPos = _currentPosition++ % _positions.Count;
+
+            StartCoroutine(BaitAndReturn(baitPos));
         }
     }
 
@@ -43,10 +40,11 @@ public class Comedian : MonoBehaviour, ISceneryElement
         {
             _moving = true;
             transform.position = Vector3.MoveTowards(transform.position, _positions[_targetPosition].position, _movementSpeed * Time.deltaTime);
-        }
-        else
-        {
-            _moving = false;
+            if (Vector3.Distance(transform.position, _positions[_targetPosition].position) == 0)
+            {
+                _currentPosition = _targetPosition;
+                _moving = false;
+            }
         }
 
 
@@ -58,5 +56,15 @@ public class Comedian : MonoBehaviour, ISceneryElement
         {
             _movingAnimation.Stop();
         }
+    }
+
+    IEnumerator BaitAndReturn(int baitPos)
+    {
+        _targetPosition = baitPos;
+
+        yield return new WaitForSeconds(1f);
+
+        _targetPosition = _currentPosition;
+        _currentPosition = baitPos;
     }
 }

@@ -25,7 +25,6 @@ public class PanelControl : MonoBehaviour
 
     [SerializeField] private GameObject _lineUIPrefabP1;
     [SerializeField] private GameObject _lineUIPrefabP2;
-    [SerializeField] private GameObject _batteryEventPrefab;
     [SerializeField] private Transform _telePrompterLinesParent;
     [SerializeField] private Transform _canvasParent;
 
@@ -138,8 +137,8 @@ public class PanelControl : MonoBehaviour
     {
         if (_currentLine.GetLineType() == E_LineType.DRUMS)
         {
-            if (!(_currentLineCounter > _currentLine.GetEventStamp() - .2f &&
-                _currentLineCounter < _currentLine.GetEventStamp() + .2f))
+            if ((_currentLineCounter > _currentLine.GetEventStamp() - .3f &&
+                _currentLineCounter < _currentLine.GetEventStamp() + .3f))
             {
                 Debug.Log("Battery pressed succesfully");
                 Success();
@@ -197,11 +196,11 @@ public class PanelControl : MonoBehaviour
                 {
                     if (line.IsComedian1())
                     {
-                        img.color = aux2 > 0 ? img.color : Color.red;
+                        img.color = aux2 > 0 ? img.color : Color.yellow;
                     }
                     else
                     {
-                        img.color = aux2 > 0 ? img.color : Color.blue;
+                        img.color = aux2 > 0 ? img.color : Color.magenta;
                     }
 
                     aux2++;
@@ -210,18 +209,17 @@ public class PanelControl : MonoBehaviour
 
             if (line.GetLineType() == E_LineType.DRUMS)
             {
-                var width = lineUI.transform.GetChild(0).GetComponent<RectTransform>().rect.width;
                 var positionPercentaje = line.GetEventStamp() / line.GetDuration();
-
-                var batEventUI = Instantiate(_batteryEventPrefab, lineUI.transform);
-
-                batEventUI.transform.localPosition = new Vector3((float)positionPercentaje * width, 0, 0);
+                var sliderBat = lineUI.transform.GetChild(1).GetComponent<Slider>();
+                sliderBat.gameObject.SetActive(true);
+                sliderBat.SetValueWithoutNotify((float)positionPercentaje);
             }
 
             if (aux == 0)
             {
                 _currentLineSlider = lineUI.transform.GetChild(0).GetComponent<Slider>();
-            }else
+            }
+            else
             {
                 lineUI.transform.localScale *= 1f + 0.2f * aux;
                 lineUI.transform.GetChild(0).GetChild(0).GetComponent<Image>().color -= new Color(.1f * aux, .1f * aux, .1f * aux, 0);
@@ -250,8 +248,8 @@ public class PanelControl : MonoBehaviour
     double _currentLinePercentage = 0;
 
     // Mic Control
-    double _initMicChangePercentaje = .1f;
-    double _endMicChangePercentaje = .9f;
+    double _initMicChangePercentaje = .3f;
+    double _endMicChangePercentaje = .7f;
     bool _micChecked = false;
 
     // Battery Control

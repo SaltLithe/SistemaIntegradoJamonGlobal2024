@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: LevelConfiguration
   m_EditorClassIdentifier: 
   generatedLinesAmmount: 5
-  allowedGeneratedLineTypes: 0000000001000000
+  allowedGeneratedLineTypes: 0000000002000000
   C2Active: 0
   drumsActive: 1
-  lightsActive: 0
+  lightsActive: 1
   audienceMembersCount: 40
