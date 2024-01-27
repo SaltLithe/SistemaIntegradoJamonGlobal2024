@@ -9,7 +9,11 @@ public class LineManager : MonoBehaviour
 
     private Stack<Line> _lines;
 
-    private Line _currentLines;
+    [SerializeField]
+    private double _lineDuration;
+
+    [SerializeField]
+    List<Line> _scriptedLines;
 
     // Start is called before the first frame update
     void Start()
@@ -28,13 +32,68 @@ public class LineManager : MonoBehaviour
         List<Line> lines = new List<Line>();
         Array values = Enum.GetValues(typeof(E_LineType));
         System.Random random = new System.Random();
-        E_LineType randomBar = (E_LineType)values.GetValue(random.Next(values.Length));
+        double eventStamp = 0;
+        bool comedian1 = true;
+        for (int i = 0; i < numLines; i++)
+        {
+            E_LineType randomLineType;
+            do
+            {
+                randomLineType = (E_LineType)values.GetValue(random.Next(values.Length));
+            } while (!disabledLineTypes.Contains(randomLineType));
+            eventStamp = random.NextDouble() * _lineDuration;
+            if(doubleComedian)
+            {
+                int randomInt = random.Next(0, 1);
+                if(randomInt == 0)
+                {
+                    comedian1 = false;
+                }
+            }
+            lines.Add(new Line(randomLineType, eventStamp, _lineDuration, comedian1));
+        }
+        ShuffleLines(lines);
+        foreach (Line line in lines)
+        {
+            _lines.Push(line);
+        }
+        foreach (Line line in _scriptedLines)
+        {
+            _lines.Push(line);
+        }
     }
 
-    public List<Line> GetLines()
+    public List<Line> GetLines(int numLines)
     {
         List<Line> lines = new List<Line>();
+        Stack<Line> stack = new Stack<Line>();
+        Line line = null;
+        for (int i = 0; i < numLines; i++)
+        {
+            line = _lines.Pop();
+            lines.Add(line);
+            stack.Push(line);
+        }
+        for (int i = 0; i < numLines - 1; i++)
+        {
+            line = stack.Pop();
+            _lines.Push(line);
+        }
         return lines;
     }
 
+
+    private void ShuffleLines(List<Line> lines)
+    {
+        System.Random random = new System.Random();
+        int n = lines.Count;
+        while (n > 1)
+        {
+            n--;
+            int k = random.Next(n + 1);
+            Line value = lines[k];
+            lines[k] = lines[n];
+            lines[n] = value;
+        }
+    }
 }
