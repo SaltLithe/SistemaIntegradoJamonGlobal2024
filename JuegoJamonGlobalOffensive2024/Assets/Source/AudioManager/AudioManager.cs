@@ -45,11 +45,15 @@ public class AudioManager : MonoBehaviour
     [SerializeField] AudioClip clickNeutral;
     [SerializeField] AudioClip clickON;
     [SerializeField] AudioClip clickOFF;
+    [SerializeField] List<AudioClip> mrKVoices;
+    [SerializeField] List<AudioClip> delilahVoices;
+    [SerializeField] List<AudioClip> cassVoices;
 
      AudioSource drumsSource;
      AudioSource clickNeutralSource;
      AudioSource clickONSource;
      AudioSource clickOFFSource;
+     AudioSource voicesSource;
 
     private void Start()
     {
@@ -62,8 +66,14 @@ public class AudioManager : MonoBehaviour
         clickONSource = gameObject.AddComponent<AudioSource>();
         clickONSource.clip = clickON;
 
+        clickOFFSource = gameObject.AddComponent<AudioSource>();
+        clickOFFSource.clip = clickOFF;
+
         drumsSource = gameObject.AddComponent<AudioSource>();
         drumsSource.clip = drumsClip;
+
+        voicesSource = gameObject.AddComponent<AudioSource>();
+        drumsSource.clip = mrKVoices[0];
     }
 
 
@@ -92,7 +102,11 @@ public class AudioManager : MonoBehaviour
         clickOFFSource.clip = clickOFF;
         clickOFFSource.Play();
         //PlayWithFadeIn(clickOFF, 0.1f);
+    }
 
+    public void PlayVoice() { }
+    public void StopVoice() {
+        if(voicesSource && voicesSource.clip)voicesSource.Stop();
     }
 
 
