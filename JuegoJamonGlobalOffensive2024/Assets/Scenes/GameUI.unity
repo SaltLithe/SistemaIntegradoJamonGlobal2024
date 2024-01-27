@@ -294,6 +294,7 @@ MonoBehaviour:
   _batteryEventPrefab: {fileID: 7084177138194240268, guid: 6f9afb872fef5fb47a6b165397b080ba, type: 3}
   _positPrefab: {fileID: 1611101568638015143, guid: 7b00723e7fe653f4c87c26d1e85287ba, type: 3}
   _telePrompterLinesParent: {fileID: 281044266}
+  _canvasParent: {fileID: 1607954965}
   _errorParafernalia: 0
   _errorMicrofono: 0
   _errorBateria: 0

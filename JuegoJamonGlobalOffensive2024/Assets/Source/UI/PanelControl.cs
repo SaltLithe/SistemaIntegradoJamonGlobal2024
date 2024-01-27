@@ -28,6 +28,7 @@ public class PanelControl : MonoBehaviour
     [SerializeField] private GameObject _batteryEventPrefab;
     [SerializeField] private GameObject _positPrefab;
     [SerializeField] private Transform _telePrompterLinesParent;
+    [SerializeField] private Transform _canvasParent;
 
     [SerializeField] private float _errorParafernalia;
     [SerializeField] private float _errorMicrofono;
@@ -53,6 +54,12 @@ public class PanelControl : MonoBehaviour
         _lightStopP2.onValueChanged.RemoveAllListeners();
     }
 
+    private void Start()
+    {
+        _lineManager.GenerateLines(20, new List<E_LineType>() { E_LineType.NO_EVENT, E_LineType.MUTE }, false);
+        Init(false, false, false);
+    }
+
     private void ParafernaliaPressed()
     {
         _showActive = true;
@@ -75,18 +82,18 @@ public class PanelControl : MonoBehaviour
 
         if (!c2Active)
         {
-            Instantiate(_positPrefab, _microfonoButtonP2.transform.position, Quaternion.identity);
-            Instantiate(_positPrefab, _lightStopP2.transform.position, Quaternion.identity);
+            Instantiate(_positPrefab, _canvasParent).transform.position = _microfonoButtonP2.transform.position;
+            Instantiate(_positPrefab, _canvasParent).transform.position = _lightStopP2.transform.position; ;
         }
 
         if (!bateriaActive)
         {
-            Instantiate(_positPrefab, _bateriaButton.transform.position, Quaternion.identity);
+            Instantiate(_positPrefab, _canvasParent).transform.position = _bateriaButton.transform.position;
         }
 
         if (!lightsActive)
         {
-            Instantiate(_positPrefab, _lightStopP1.transform.position, Quaternion.identity);
+            Instantiate(_positPrefab, _canvasParent).transform.position = _lightStopP1.transform.position;
         }
 
         GetLines();
