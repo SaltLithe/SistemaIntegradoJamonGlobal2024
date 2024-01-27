@@ -26,6 +26,7 @@ public class PanelControl : MonoBehaviour
     [SerializeField] private GameObject _lineUIPrefabP1;
     [SerializeField] private GameObject _lineUIPrefabP2;
     [SerializeField] private GameObject _batteryEventPrefab;
+    [SerializeField] private GameObject _positPrefab;
     [SerializeField] private Transform _telePrompterLinesParent;
 
     [SerializeField] private float _errorParafernalia;
@@ -50,17 +51,6 @@ public class PanelControl : MonoBehaviour
         _lightLeftP2.onValueChanged.RemoveAllListeners();
         _lightRightP2.onValueChanged.RemoveAllListeners();
         _lightStopP2.onValueChanged.RemoveAllListeners();
-
-        _parafernaliaButton.onClick.AddListener(ParafernaliaPressed);
-        _microfonoButtonP1.onValueChanged.AddListener(PressMicrofonoP1);
-        _microfonoButtonP2.onValueChanged.AddListener(PressMicrofonoP2);
-        _bateriaButton.onClick.AddListener(PressBateria);
-        _lightLeftP1.onValueChanged.AddListener((bool value) => { if (value) MoveLightP1(-1); });
-        _lightRightP1.onValueChanged.AddListener((bool value) => { if (value) MoveLightP1(1); });
-        _lightStopP1.onValueChanged.AddListener((bool value) => { if (value) MoveLightP1(0); });
-        _lightLeftP2.onValueChanged.AddListener((bool value) => { if (value) MoveLightP2(-1); });
-        _lightRightP2.onValueChanged.AddListener((bool value) => { if (value) MoveLightP2(1); });
-        _lightStopP2.onValueChanged.AddListener((bool value) => { if (value) MoveLightP2(0); });
     }
 
     private void ParafernaliaPressed()
@@ -69,9 +59,36 @@ public class PanelControl : MonoBehaviour
         OnPlayerAction?.Invoke(PlayerAction.Parafernalia, null);
     }
 
-    private void Start()
+    public void Init(bool c2Active, bool bateriaActive, bool lightsActive)
     {
-        _lineManager.GenerateLines(20, new List<E_LineType>() { E_LineType.NO_EVENT, E_LineType.MUTE, E_LineType.DRUMS}, true);
+        _parafernaliaButton.onClick.AddListener(ParafernaliaPressed);
+        _microfonoButtonP1.onValueChanged.AddListener(PressMicrofonoP1);
+        if (c2Active) _microfonoButtonP2.onValueChanged.AddListener(PressMicrofonoP2);
+        if (bateriaActive) _bateriaButton.onClick.AddListener(PressBateria);
+        if (lightsActive) _lightLeftP1.onValueChanged.AddListener((bool value) => { if (value) MoveLightP1(-1); });
+        if (lightsActive) _lightRightP1.onValueChanged.AddListener((bool value) => { if (value) MoveLightP1(1); });
+        if (lightsActive) _lightStopP1.onValueChanged.AddListener((bool value) => { if (value) MoveLightP1(0); });
+        if (c2Active) _lightLeftP2.onValueChanged.AddListener((bool value) => { if (value) MoveLightP2(-1); });
+        if (c2Active) _lightRightP2.onValueChanged.AddListener((bool value) => { if (value) MoveLightP2(1); });
+        if (c2Active) _lightStopP2.onValueChanged.AddListener((bool value) => { if (value) MoveLightP2(0); });
+
+
+        if (!c2Active)
+        {
+            Instantiate(_positPrefab, _microfonoButtonP2.transform.position, Quaternion.identity);
+            Instantiate(_positPrefab, _lightStopP2.transform.position, Quaternion.identity);
+        }
+
+        if (!bateriaActive)
+        {
+            Instantiate(_positPrefab, _bateriaButton.transform.position, Quaternion.identity);
+        }
+
+        if (!lightsActive)
+        {
+            Instantiate(_positPrefab, _lightStopP1.transform.position, Quaternion.identity);
+        }
+
         GetLines();
     }
 
@@ -151,7 +168,7 @@ public class PanelControl : MonoBehaviour
         var aux = 0;
         foreach (Line line in lines)
         {
-            var lineUI = Instantiate(_lineUIPrefabP1, _telePrompterLinesParent);
+            var lineUI = Instantiate(line.IsComedian1() ? _lineUIPrefabP1 : _lineUIPrefabP2, _telePrompterLinesParent);
 
             if (line.GetLineType() == E_LineType.MUTE)
             {
@@ -173,7 +190,7 @@ public class PanelControl : MonoBehaviour
 
             if (line.GetLineType() == E_LineType.DRUMS)
             {
-                var width = lineUI.GetComponent<RectTransform>().rect.width;
+                var width = lineUI.transform.GetChild(0).GetComponent<RectTransform>().rect.width;
                 var positionPercentaje = line.GetEventStamp() / line.GetDuration();
 
                 var batEventUI = Instantiate(_batteryEventPrefab, lineUI.transform);
@@ -263,6 +280,7 @@ public class PanelControl : MonoBehaviour
     private void CheckBattery()
     {
         if (_currentLinePercentage < 1) return;
+        if (_currentLine.GetLineType() != E_LineType.DRUMS) return;
 
         if (!_batteryPressedInTime) Error(_errorBateria);
     }

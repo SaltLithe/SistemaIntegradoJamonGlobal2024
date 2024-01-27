@@ -43,7 +43,7 @@ public class LineManager : MonoBehaviour
             {
                 randomLineType = (E_LineType)values.GetValue(random.Next(values.Length));
             } while (!disabledLineTypes.Contains(randomLineType));
-            eventStamp = random.NextDouble() * _lineDuration;
+            eventStamp = Mathf.Clamp((float)(random.NextDouble() * _lineDuration), 0, (float)_lineDuration);
             if(doubleComedian)
             {
                 int randomInt = random.Next(0, 2);
