@@ -30,7 +30,7 @@ public class GameManager : MonoBehaviour
     private LineManager _lineManager;
     private AudienceManager _audienceManager;
     private PanelControl _panelControl;
-    //private ScenaryManager _scenaryManager;
+    private SceneryManager _sceneryManager;
 
     private void Awake()
     {
@@ -76,9 +76,9 @@ public class GameManager : MonoBehaviour
     {       
             _lineManager.GenerateLines(config.GetGeneratedLinesAmmount(), config.GetAllowedLineTypes(), config.GetAllowedSecondComedian());
             _lineManager.AddScriptedLines(config.GetScriptedLines());
-            //_panelControl.Init(config.GetC2Active(), config.GetDrumsActive(), config.GetLightsActive());
+            _panelControl.Init(config.GetC2Active(), config.GetDrumsActive(), config.GetLightsActive());
             // SCENARY MANAGER INITIALIZE
-            // AUDIENCE MANAGER INITIALIZE
+            _audienceManager.GenerateAudience(config.GetAudienceMembersCount());
     }
 
     //public void InitNextLevel()
@@ -86,7 +86,7 @@ public class GameManager : MonoBehaviour
     //    _lineManager = GameObject.Find("LineManager").GetComponent<LineManager>();
     //    _audienceManager = GameObject.Find("AudienceManager").GetComponent<AudienceManager>();
     //    _panelControl = GameObject.Find("PanelControl").GetComponent<PanelControl>();
-    //    // _scenaryManager = GameObject.Find("ScenaryManager").GetComponent<ScenaryManager>();
+    //    // _sceneryManager = GameObject.Find("ScenaryManager").GetComponent<ScenaryManager>();
     //    if (_levelConfigurations.Count != 0)
     //    {
     //        LevelConfiguration config = _levelConfigurations.Pop();
@@ -114,11 +114,11 @@ public class GameManager : MonoBehaviour
         }
         while (_panelControl == null);
 
-        //do
-        //{
-        //    _scenaryManager = GameObject.Find("ScenaryManager").GetComponent<ScenaryManager>();
-        //}
-        //while (_scenaryManager == null);
+        do
+        {
+            _sceneryManager = GameObject.Find("ScenaryManager").GetComponent<ScenaryManager>();
+        }
+        while (_sceneryManager == null);
 
         if (_levelConfigurations.Count != 0)
         {

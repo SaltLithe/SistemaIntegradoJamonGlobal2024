@@ -22,9 +22,7 @@ public class AudienceManager : MonoBehaviour
     public float _healthZeroMargin = 0.05f; 
     void Awake()
     {
-        GenerateAudience(_audienceMembersCount);
-   
-       
+        //GenerateAudience(_audienceMembersCount);
     }
     // Start is called before the first frame update
     void Start()
@@ -57,7 +55,7 @@ public class AudienceManager : MonoBehaviour
     }
 
     //Salen tantos miembros del publico como pongas en el audienceMembersCount
-    private void GenerateAudience(int audienceMembersCount) 
+    public void GenerateAudience(int audienceMembersCount) 
     {
         for (int i = 0; i< audienceMembersCount; i++) 
         {       
