@@ -3,8 +3,8 @@ public enum PlayerAction
 {
     Parafernalia,
     Battery,
-    P1Microphone,
-    P2Microphone,
-    P1MoveLight,
-    P2MoveLight
+    C1Microphone,
+    C2Microphone,
+    C1MoveLight,
+    C2MoveLight
 }

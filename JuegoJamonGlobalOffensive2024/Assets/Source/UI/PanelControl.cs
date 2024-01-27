@@ -54,12 +54,6 @@ public class PanelControl : MonoBehaviour
         _lightStopP2.onValueChanged.RemoveAllListeners();
     }
 
-    private void Start()
-    {
-        _lineManager.GenerateLines(20, new List<E_LineType>() { E_LineType.NO_EVENT, E_LineType.MUTE }, false);
-        Init(false, false, false);
-    }
-
     private void ParafernaliaPressed()
     {
         _showActive = true;
@@ -101,25 +95,25 @@ public class PanelControl : MonoBehaviour
 
     private void MoveLightP2(int direction)
     {
-        OnPlayerAction?.Invoke(PlayerAction.P2MoveLight, new LightMovementInformation(direction));
+        OnPlayerAction?.Invoke(PlayerAction.C2MoveLight, new LightMovementInformation(direction));
     }
 
     private void MoveLightP1(int direction)
     {
-        OnPlayerAction?.Invoke(PlayerAction.P1MoveLight, new LightMovementInformation(direction));
+        OnPlayerAction?.Invoke(PlayerAction.C1MoveLight, new LightMovementInformation(direction));
     }
 
     private void PressMicrofonoP1(bool value)
     {
         _mic1Activated = !_mic1Activated;
-        OnPlayerAction?.Invoke(PlayerAction.P1Microphone, null);
+        OnPlayerAction?.Invoke(PlayerAction.C1Microphone, null);
         Debug.Log("Microphone UI pressed");
     }
 
     private void PressMicrofonoP2(bool value)
     {
         _mic2Activated = !_mic2Activated;
-        OnPlayerAction?.Invoke(PlayerAction.P2Microphone, null);
+        OnPlayerAction?.Invoke(PlayerAction.C2Microphone, null);
         Debug.Log("Microphone UI pressed");
     }
 
@@ -168,6 +162,7 @@ public class PanelControl : MonoBehaviour
         if (lines.Count() == 0) 
         {
             Debug.Log("Finish Level");
+            GameManager.Instance.FinishLevelWin();
             return;
         }
 
@@ -296,10 +291,12 @@ public class PanelControl : MonoBehaviour
     private void Error(float errorAmmount)
     {
         Debug.Log("Player Mistake");
+        GameManager.Instance.PlayerError(errorAmmount);
     }
 
     private void Success()
     {
         Debug.Log("Player Success");
+        GameManager.Instance.PlayerSuccess();
     }
 }

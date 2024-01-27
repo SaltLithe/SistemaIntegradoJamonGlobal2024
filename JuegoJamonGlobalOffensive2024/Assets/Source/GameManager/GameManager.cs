@@ -4,44 +4,63 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEditor.Networking.PlayerConnection;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
+    //private bool _created = false;
 
-    private float _life;
+    private float _life = 1;
 
     public static event Action<float> Exit;
+    public static event Action<float> Laugh;
+
+    public static int _currentLevel = 0;
 
     [SerializeField]
-    private Stack<LevelConfiguration> _levelConfigurations;
+    private LevelConfiguration[] _levelConfigurationArray;
+    private static Stack<LevelConfiguration> _levelConfigurations;
 
     [SerializeField]
-    private LevelConfiguration _postGame;
+    private int _winSceneIndex, _failSceneIndex;
+
+    [SerializeField]
+    private Canvas _fadeToBlackCanvas;
+    [SerializeField]
+    private float _fadeDuration;
 
     private LineManager _lineManager;
     private AudienceManager _audienceManager;
     private PanelControl _panelControl;
-    //private ScenaryManager _scenaryManager;
+    private SceneryManager _sceneryManager;
+
+    public static GameManager Instance;
 
     private void Awake()
     {
-        DontDestroyOnLoad(this.gameObject);
+        //if(!_created)
+        //{
+        //    DontDestroyOnLoad(this.gameObject);
+        //    _created = true;
+        //}
+        Instance = this;
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        _lineManager = GameObject.Find("LineManager").GetComponent<LineManager>();
-        _audienceManager =  GameObject.Find("AudienceManager").GetComponent<AudienceManager>();
-        _panelControl = GameObject.Find("PanelControl").GetComponent<PanelControl>();
-        // _scenaryManager = GameObject.Find("ScenaryManager").GetComponent<ScenaryManager>();
-        LoadNextLevel();
+        InitLevel();
+        _fadeToBlackCanvas.GetComponent<FadeToBlack>().ActivateFade(true, _fadeDuration, 0);
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if(_life <= 0)
+        {
+            FinishLevelFail();
+        }
     }
 
     public void PlayerError(float percentage)
@@ -51,19 +70,88 @@ public class GameManager : MonoBehaviour
         {
             _life = 0;
         }
+        Debug.LogWarning($"Current Life {_life}");
+
         Exit?.Invoke(_life);
     }
 
-    public void LoadNextLevel()
+    public void PlayerSuccess()
     {
-        if(_levelConfigurations.Count != 0)
-        {
-            LevelConfiguration config = _levelConfigurations.Pop();
-            _lineManager.GenerateLines(config.GetGeneratedLinesAmmount(), config.GetAllowedLineTypes(), config.GetAllowedSecondComedian());
+        Laugh?.Invoke(UnityEngine.Random.Range((float)0.7, 1));
+    }
+
+    public void LoadLevelConfig(LevelConfiguration config)
+    {       
+            _lineManager.GenerateLines(config.GetGeneratedLinesAmmount(), config.GetAllowedLineTypes(), config.GetC2Active());
             _lineManager.AddScriptedLines(config.GetScriptedLines());
-            //_panelControl.Init(config.GetC2Active(), config.GetDrumsActive(), config.GetLightsActive());
-            // SCENARY MANAGER INITIALIZE
-            // AUDIENCE MANAGER INITIALIZE
+            _panelControl.Init(config.GetC2Active(), config.GetDrumsActive(), config.GetLightsActive());
+            _sceneryManager.Init(config.GetLightsActive(), config.GetC2Active());
+            _audienceManager.GenerateAudience(config.GetAudienceMembersCount());
+    }
+
+    //public void InitNextLevel()
+    //{
+    //    _lineManager = GameObject.Find("LineManager").GetComponent<LineManager>();
+    //    _audienceManager = GameObject.Find("AudienceManager").GetComponent<AudienceManager>();
+    //    _panelControl = GameObject.Find("PanelControl").GetComponent<PanelControl>();
+    //    // _sceneryManager = GameObject.Find("ScenaryManager").GetComponent<ScenaryManager>();
+    //    if (_levelConfigurations.Count != 0)
+    //    {
+    //        LevelConfiguration config = _levelConfigurations.Pop();
+    //        LoadLevelConfig(config);
+    //    }
+    //}
+
+    public void InitLevel()
+    {
+        do
+        {
+            _lineManager = FindObjectOfType<LineManager>();
+        } 
+        while (_lineManager == null);
+
+        do
+        {
+            _audienceManager = GameObject.Find("AudienceManager").GetComponent<AudienceManager>();
         }
+        while (_audienceManager == null);
+
+        do
+        {
+            _panelControl = FindObjectOfType<PanelControl>();
+        }
+        while (_panelControl == null);
+
+        do
+        {
+            _sceneryManager = FindObjectOfType<SceneryManager>();
+        }
+        while (_sceneryManager == null);
+
+        if (_levelConfigurationArray.Length != 0 && _currentLevel < _levelConfigurationArray.Length)
+        {
+            LevelConfiguration config = _levelConfigurationArray[_currentLevel];
+            LoadLevelConfig(config);
+            _currentLevel++;
+        }
+    }
+
+    public void FinishLevelWin()
+    {
+        _fadeToBlackCanvas.GetComponent<FadeToBlack>().ActivateFade(true, _fadeDuration, 1);
+        StartCoroutine(WaitCoroutine(_fadeDuration));
+        SceneManager.LoadScene(_winSceneIndex);
+    }
+
+    public void FinishLevelFail()
+    {
+        _fadeToBlackCanvas.GetComponent<FadeToBlack>().ActivateFade(true, _fadeDuration, 1);
+        StartCoroutine(WaitCoroutine(_fadeDuration));
+        SceneManager.LoadScene(_failSceneIndex);
+    }
+
+    IEnumerator WaitCoroutine(float seconds)
+    {
+        yield return new WaitForSeconds(seconds);
     }
 }

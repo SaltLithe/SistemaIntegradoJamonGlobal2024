@@ -11,7 +11,13 @@ public class AudienceMember : MonoBehaviour
     public int _id = -1;
     private Transform _exitPoint;
 
-    private bool _tryExit = false; 
+    float _laughAmount = 0.07f;
+    private float _laughInterval = 0.07f;
+    private int _laughShakes = 10; 
+
+    private bool _tryExit = false;
+    private bool _tryLaugh = false;
+
     // Start is called before the first frame update
 
     private void Awake()
@@ -29,8 +35,24 @@ public class AudienceMember : MonoBehaviour
         {
             transform.position = Vector3.Lerp(transform.position, _exitPoint.position, Time.deltaTime);
         }
-    }
 
+        if (_tryLaugh) 
+        {
+            StartCoroutine(Tremble());
+            _tryLaugh = false; 
+            
+        }
+    }
+    IEnumerator Tremble()
+    {
+        for (int i = 0; i < _laughShakes; i++)
+        {
+            transform.localPosition += new Vector3(0, _laughAmount, 0);
+            yield return new WaitForSeconds(_laughInterval);
+            transform.localPosition -= new Vector3(0, _laughAmount, 0);
+            yield return new WaitForSeconds(_laughInterval);
+        }
+    }
     public void Initialize(int id, Transform exitPointf) 
     {
         _id = id;
@@ -44,16 +66,16 @@ public class AudienceMember : MonoBehaviour
 
     public void Laugh()
     {
-        Debug.Log(_id + " : JAJAJAJAJ"); 
+        Debug.Log(_id + " : JAJAJAJAJ");
+
+        _tryLaugh = true; 
     }
 
-    void OnTriggerEnter(Collider collider)
+    private void OnTriggerEnter(Collider other)
     {
-        if (collider.gameObject.tag == "DespawnPoint")
+        if (other.gameObject.tag == "DespawnPoint")
         {
-            Debug.Log("LEAVING");
             Destroy(gameObject);
-
         }
     }
 

@@ -9,6 +9,7 @@ public class AudienceManager : MonoBehaviour
     public GameObject _audienceMemberPrefab;
     public Transform _exitPoint; 
     public BoxCollider _spawnBounds;
+    public BoxCollider _wallBack; 
     public int _audienceMembersCount = 20;
     private int _nextId = -1;
     private Dictionary<int, GameObject> _audienceMembers = new Dictionary<int, GameObject>();
@@ -21,9 +22,9 @@ public class AudienceManager : MonoBehaviour
     public float _healthZeroMargin = 0.05f; 
     void Awake()
     {
-        GenerateAudience(_audienceMembersCount);
-   
-       
+        //GenerateAudience(_audienceMembersCount);
+        GameManager.Exit += Exit;
+        GameManager.Laugh += Laugh;
     }
     // Start is called before the first frame update
     void Start()
@@ -53,16 +54,20 @@ public class AudienceManager : MonoBehaviour
     private void OnDestroy()
     {
         //TODO unsuscribe
+        GameManager.Exit -= Exit;
+        GameManager.Laugh -= Laugh;
     }
 
     //Salen tantos miembros del publico como pongas en el audienceMembersCount
-    private void GenerateAudience(int audienceMembersCount) 
+    public void GenerateAudience(int audienceMembersCount) 
     {
         for (int i = 0; i< audienceMembersCount; i++) 
         {       
                 Vector3 nextPosition = GenNextPosition();
                 SpawnAudienceMember(nextPosition);
         }
+
+        _wallBack.enabled = false; 
     }
 
     //Spawnea un miembro del publico dentro del volumen definido por el spawn
@@ -113,7 +118,7 @@ public class AudienceManager : MonoBehaviour
        
     }
 
-    private int Exit (float currentHealh)
+    private void Exit (float currentHealh)
     {
         if (_audienceMembers.Count != 0 && currentHealh > _healthZeroMargin)
         {
@@ -129,7 +134,7 @@ public class AudienceManager : MonoBehaviour
                 toDestroy.GetComponent<AudienceMember>().ExitAudience();
             }
 
-            return _audienceMembers.Count;
+           
         }
         else if (currentHealh <= _healthZeroMargin)
         {
@@ -139,13 +144,9 @@ public class AudienceManager : MonoBehaviour
                 _audienceMembers.Remove(exitCandidate);
                 toDestroy.GetComponent <AudienceMember>().ExitAudience();
             }
-            return 0; 
-        }
-        else
-        {
-            return 0;
-        }
         
+        }
+     
     }
 
   
