@@ -49,11 +49,8 @@ public class LineManager : MonoBehaviour
             eventStamp = random.NextDouble() * _lineDuration;
             if(doubleComedian)
             {
-                int randomInt = random.Next(0, 1);
-                if(randomInt == 0)
-                {
-                    comedian1 = false;
-                }
+                int randomInt = random.Next(0, 2);
+                comedian1 = randomInt == 0;
             }
             lines.Add(new Line(randomLineType, _lineDuration, eventStamp, comedian1));
         }

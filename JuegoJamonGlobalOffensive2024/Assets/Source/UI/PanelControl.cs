@@ -25,15 +25,22 @@ public class PanelControl : MonoBehaviour
 
     [SerializeField] private GameObject _lineUIPrefabP1;
     [SerializeField] private GameObject _lineUIPrefabP2;
+    [SerializeField] private GameObject _batteryEventPrefab;
     [SerializeField] private Transform _telePrompterLinesParent;
 
+    [SerializeField] private float _errorParafernalia;
+    [SerializeField] private float _errorMicrofono;
+    [SerializeField] private float _errorBateria;
+
     [Header("Info")]
+    [SerializeField] bool _showActive = false;
     [SerializeField] bool _mic1Activated = false;
     [SerializeField] bool _mic2Activated = false;
 
 
     private void Awake()
     {
+        _parafernaliaButton.onClick.RemoveAllListeners();
         _microfonoButtonP1.onValueChanged.RemoveAllListeners();
         _microfonoButtonP2.onValueChanged.RemoveAllListeners();
         _bateriaButton.onClick.RemoveAllListeners();
@@ -44,6 +51,7 @@ public class PanelControl : MonoBehaviour
         _lightRightP2.onValueChanged.RemoveAllListeners();
         _lightStopP2.onValueChanged.RemoveAllListeners();
 
+        _parafernaliaButton.onClick.AddListener(ParafernaliaPressed);
         _microfonoButtonP1.onValueChanged.AddListener(PressMicrofonoP1);
         _microfonoButtonP2.onValueChanged.AddListener(PressMicrofonoP2);
         _bateriaButton.onClick.AddListener(PressBateria);
@@ -55,9 +63,15 @@ public class PanelControl : MonoBehaviour
         _lightStopP2.onValueChanged.AddListener((bool value) => { if (value) MoveLightP2(0); });
     }
 
+    private void ParafernaliaPressed()
+    {
+        _showActive = true;
+        OnPlayerAction?.Invoke(PlayerAction.Parafernalia, null);
+    }
+
     private void Start()
     {
-        _lineManager.GenerateLines(20, new List<E_LineType>() { E_LineType.NO_EVENT, E_LineType.MUTE, E_LineType.DRUMS}, false);
+        _lineManager.GenerateLines(20, new List<E_LineType>() { E_LineType.NO_EVENT, E_LineType.MUTE, E_LineType.DRUMS}, true);
         GetLines();
     }
 
@@ -93,21 +107,28 @@ public class PanelControl : MonoBehaviour
                 _currentLineCounter < _currentLine.GetEventStamp() + .2f))
             {
                 Debug.Log("Battery pressed succesfully");
+                Success();
+                _batteryPressedInTime = true;
             }
             else
             {
-                Error();
+                Debug.Log("Battery pressed succesfullyn't");
+                Error(_errorBateria);
             }
+        }
+        else
+        {
+            Debug.Log("Battery pressed succesfullyn't");
+            Error(_errorBateria);
         }
 
         OnPlayerAction?.Invoke(PlayerAction.Battery, null);
-        Debug.Log("Battery UI pressed");
     }
 
     private void GetLines()
     {
         //GetLines
-        ShowLines(_lineManager.GetLines(3));
+        ShowLines(_lineManager.GetLines(10));
     }
 
     public void ShowLines(IEnumerable<Line> lines)
@@ -139,15 +160,25 @@ public class PanelControl : MonoBehaviour
                 {
                     if (line.IsComedian1())
                     {
-                        img.color = aux2 > 0 ? Color.red : Color.black;
+                        img.color = aux2 > 0 ? img.color : Color.red;
                     }
                     else
                     {
-                        img.color = aux2 > 0 ? Color.blue : Color.black;
+                        img.color = aux2 > 0 ? img.color : Color.blue;
                     }
 
                     aux2++;
                 }
+            }
+
+            if (line.GetLineType() == E_LineType.DRUMS)
+            {
+                var width = lineUI.GetComponent<RectTransform>().rect.width;
+                var positionPercentaje = line.GetEventStamp() / line.GetDuration();
+
+                var batEventUI = Instantiate(_batteryEventPrefab, lineUI.transform);
+
+                batEventUI.transform.localPosition = new Vector3((float)positionPercentaje * width, 0, 0);
             }
 
             if (aux > 0) lineUI.transform.localScale *= .9f;
@@ -164,6 +195,7 @@ public class PanelControl : MonoBehaviour
         _currentLineCounter = 0;
         _currentLinePercentage = 0;
         _micChecked = false;
+        _batteryPressedInTime = false;
 
         //Activate Line Control
         _lineControlEnabled = true;
@@ -182,8 +214,12 @@ public class PanelControl : MonoBehaviour
     double _endMicChangePercentaje = .9f;
     bool _micChecked = false;
 
+    // Battery Control
+    bool _batteryPressedInTime = false;
+
     private void Update()
     {
+        if (!_showActive) return;
         if (!_lineControlEnabled) return;
 
         _currentLineCounter += Time.deltaTime;
@@ -191,23 +227,11 @@ public class PanelControl : MonoBehaviour
 
         _currentLineSlider.value = (float)_currentLinePercentage;
 
+        //Check Mic
+        CheckMic();
 
-        if (_currentLinePercentage > _initMicChangePercentaje &&
-            _currentLinePercentage < _endMicChangePercentaje &&
-            !_micChecked)
-        {
-            _micChecked = true;
-            
-            //Check for error
-            if (_currentLine.GetLineType() == E_LineType.MUTE)
-            {
-                if (_currentLine.IsComedian1() ? _mic1Activated : _mic2Activated) Error();
-            }
-            else
-            {
-                if (_currentLine.IsComedian1() ? !_mic1Activated : !_mic2Activated) Error();
-            }
-        }
+        //CheckBattery
+        CheckBattery();
 
         if (_currentLinePercentage >= 1) // Get New Lines
         {
@@ -216,9 +240,41 @@ public class PanelControl : MonoBehaviour
         }
     }
 
+    private void CheckMic()
+    {
+        if (_currentLinePercentage > _initMicChangePercentaje &&
+            _currentLinePercentage < _endMicChangePercentaje &&
+            !_micChecked)
+        {
+            _micChecked = true;
 
-    private void Error()
+            //Check for error
+            if (_currentLine.GetLineType() == E_LineType.MUTE)
+            {
+                if (_currentLine.IsComedian1() ? _mic1Activated : _mic2Activated) Error(_errorMicrofono);
+            }
+            else
+            {
+                if (_currentLine.IsComedian1() ? !_mic1Activated : !_mic2Activated) Error(_errorMicrofono);
+            }
+        }
+    }
+
+    private void CheckBattery()
+    {
+        if (_currentLinePercentage < 1) return;
+
+        if (!_batteryPressedInTime) Error(_errorBateria);
+    }
+
+
+    private void Error(float errorAmmount)
     {
         Debug.Log("Player Mistake");
+    }
+
+    private void Success()
+    {
+        Debug.Log("Player Success");
     }
 }
