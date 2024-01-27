@@ -4,39 +4,47 @@ using UnityEngine;
 
 public class Comedian : MonoBehaviour, ISceneryElement
 {
-    [SerializeField] private Transform _initialPosition;
-    [SerializeField] private Transform _endPosition;
+    [SerializeField] private List<Transform> _positions;
     [SerializeField] private float _movementTime;
     [SerializeField] private Animation _movingAnimation;
 
-    private Transform _targetPosition;
-    private float _movementSpeed;
-    private bool _isAtInitialPosition;
+    private int _currentPosition;
+    private int _targetPosition;
+    [SerializeField] private float _movementSpeed;
     private bool _moving;
 
 
     private void Start()
     {
-        _isAtInitialPosition = true;
         _moving = false;
-        _targetPosition = _initialPosition;
-        _movementTime = Vector3.Distance(_initialPosition.position, _endPosition.position) / _movementTime;
+        _currentPosition = 0;
+        _targetPosition = 0;
+        _movementSpeed = Vector3.Distance(_positions[_currentPosition].position, _positions[_targetPosition].position) / _movementTime;
     }
 
     public void ReceiveInformation(SceneElementInformation info)
     {
-        _targetPosition = _isAtInitialPosition ? _endPosition : _initialPosition;
-        _isAtInitialPosition = !_isAtInitialPosition;
+        _targetPosition = Random.Range(0, _positions.Count);
+
+        if (_targetPosition == _currentPosition)
+        {
+            //Do some bait
+        }
+        else
+        {
+            _movementSpeed = Vector3.Distance(_positions[_currentPosition].position, _positions[_targetPosition].position) / _movementTime;
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Vector3.Distance(transform.position, _targetPosition.position) > 0) 
+        if (_currentPosition != _targetPosition)
         {
             _moving = true;
-            transform.position = Vector3.MoveTowards(transform.position, _targetPosition.position, _movementSpeed * Time.deltaTime);
-        }else
+            transform.position = Vector3.MoveTowards(transform.position, _positions[_targetPosition].position, _movementSpeed * Time.deltaTime);
+        }
+        else
         {
             _moving = false;
         }

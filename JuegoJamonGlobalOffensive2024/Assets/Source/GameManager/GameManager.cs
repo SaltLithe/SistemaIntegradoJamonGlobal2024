@@ -11,16 +11,19 @@ public class GameManager : MonoBehaviour
 {
     //private bool _created = false;
 
-    private float _life;
+    private float _life = 1;
 
     public static event Action<float> Exit;
     public static event Action<float> Laugh;
 
+    public static int _currentLevel = 0;
+
     [SerializeField]
+    private LevelConfiguration[] _levelConfigurationArray;
     private static Stack<LevelConfiguration> _levelConfigurations;
 
     [SerializeField]
-    private static int _winSceneIndex, _failSceneIndex;
+    private int _winSceneIndex, _failSceneIndex;
 
     [SerializeField]
     private Canvas _fadeToBlackCanvas;
@@ -67,6 +70,8 @@ public class GameManager : MonoBehaviour
         {
             _life = 0;
         }
+        Debug.LogWarning($"Current Life {_life}");
+
         Exit?.Invoke(_life);
     }
 
@@ -77,7 +82,7 @@ public class GameManager : MonoBehaviour
 
     public void LoadLevelConfig(LevelConfiguration config)
     {       
-            _lineManager.GenerateLines(config.GetGeneratedLinesAmmount(), config.GetAllowedLineTypes(), config.GetAllowedSecondComedian());
+            _lineManager.GenerateLines(config.GetGeneratedLinesAmmount(), config.GetAllowedLineTypes(), config.GetC2Active());
             _lineManager.AddScriptedLines(config.GetScriptedLines());
             _panelControl.Init(config.GetC2Active(), config.GetDrumsActive(), config.GetLightsActive());
             _sceneryManager.Init(config.GetLightsActive(), config.GetC2Active());
@@ -101,32 +106,33 @@ public class GameManager : MonoBehaviour
     {
         do
         {
-            _lineManager = GameObject.Find("LineManager").GetComponent<LineManager>();
+            _lineManager = FindObjectOfType<LineManager>();
         } 
         while (_lineManager == null);
 
         do
-        { 
+        {
             _audienceManager = GameObject.Find("AudienceManager").GetComponent<AudienceManager>();
         }
         while (_audienceManager == null);
 
         do
         {
-            _panelControl = GameObject.Find("PanelControl").GetComponent<PanelControl>();
+            _panelControl = FindObjectOfType<PanelControl>();
         }
         while (_panelControl == null);
 
         do
         {
-            _sceneryManager = GameObject.Find("ScenaryManager").GetComponent<SceneryManager>();
+            _sceneryManager = FindObjectOfType<SceneryManager>();
         }
         while (_sceneryManager == null);
 
-        if (_levelConfigurations.Count != 0)
+        if (_levelConfigurationArray.Length != 0 && _currentLevel < _levelConfigurationArray.Length)
         {
-            LevelConfiguration config = _levelConfigurations.Pop();
+            LevelConfiguration config = _levelConfigurationArray[_currentLevel];
             LoadLevelConfig(config);
+            _currentLevel++;
         }
     }
 
