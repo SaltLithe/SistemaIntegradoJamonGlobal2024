@@ -4,6 +4,7 @@ using UnityEngine;
 
 public static class ColorManager 
 {
+    /*
     public static Dictionary<E_LineType, Color> _colorDictionary = new Dictionary<E_LineType, Color>()
     {
         {E_LineType.RED, Color.red },
@@ -20,5 +21,6 @@ public static class ColorManager
     {
         return _colorDictionary[lineType];
     }
+    */
 }
 

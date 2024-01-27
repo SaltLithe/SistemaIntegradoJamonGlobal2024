@@ -12,7 +12,7 @@ public class AudienceManager : MonoBehaviour
 
     void Awake()
     {
-        GenerateAudience(new E_LineType[] { E_LineType.RED }, new int[] { 1 });
+        //GenerateAudience(new E_LineType[] { E_LineType.RED }, new int[] { 1 });
        
     }
     // Start is called before the first frame update
