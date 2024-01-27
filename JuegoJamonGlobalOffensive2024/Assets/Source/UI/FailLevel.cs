@@ -1,13 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-using System;
+using UnityEngine.UI;
 
-public class InterLevelCanvas : MonoBehaviour
+public class FailLevel : MonoBehaviour
 {
-
     [SerializeField]
     private Canvas _fadeCanvas;
 
@@ -15,23 +13,13 @@ public class InterLevelCanvas : MonoBehaviour
     private float _duration;
 
     [SerializeField]
-    private int _gameSceneIndex, _mainMenuIndex;
-
-    [SerializeField]
-    private Image _image;
-
-    [SerializeField]
-    private Sprite[] _sprites;
-
-    private static int _currentSprite = 0;
+    private int _mainMenuIndex;
 
     private bool _canLoad = false;
 
     // Start is called before the first frame update
     void Start()
     {
-        _image.sprite = _sprites[_currentSprite];
-        _currentSprite++;
         _fadeCanvas.GetComponent<FadeToBlack>().ActivateFade(true, _duration, 0);
         StartCoroutine(WaitCoroutine(_duration));
         _canLoad = true;
@@ -44,11 +32,7 @@ public class InterLevelCanvas : MonoBehaviour
 
     public void NextButtonPressed()
     {
-        if (_canLoad && _currentSprite < _sprites.Length - 1) 
-        {
-            SceneManager.LoadScene(_gameSceneIndex);
-        }
-        else if(_currentSprite >= _sprites.Length - 1)
+        if (_canLoad)
         {
             SceneManager.LoadScene(_mainMenuIndex);
         }

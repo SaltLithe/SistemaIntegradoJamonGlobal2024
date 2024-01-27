@@ -11,4 +11,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Game.unity
     guid: 16047114f73e46149921388c2a6046b0
+  - enabled: 1
+    path: Assets/Scenes/InterLevel.unity
+    guid: eb884d461bfd693429e4741af035c94b
+  - enabled: 1
+    path: Assets/Scenes/FailLevel.unity
+    guid: 084bc786ce4d5dd4e998effb9379d7f4
   m_configObjects: {}
