@@ -7,6 +7,7 @@ using UnityEngine;
 public class AudienceManager : MonoBehaviour
 {
     public GameObject _audienceMemberPrefab;
+    public Transform _exitPoint; 
     public BoxCollider _spawnBounds;
     public int _audienceMembersCount = 20;
     private int _nextId = -1;
@@ -69,7 +70,7 @@ public class AudienceManager : MonoBehaviour
     {
         GameObject newAudienceMember = Instantiate(_audienceMemberPrefab, nextPosition, Quaternion.identity);
         _nextId++;
-        newAudienceMember.GetComponent<AudienceMember>().SetId(_nextId); 
+        newAudienceMember.GetComponent<AudienceMember>().Initialize(_nextId, _exitPoint); 
         newAudienceMember.SetActive(true); 
         _audienceMembers.Add(_nextId, newAudienceMember);
     }
