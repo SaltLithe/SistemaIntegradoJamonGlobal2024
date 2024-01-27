@@ -12,9 +12,6 @@ public class LineManager : MonoBehaviour
     [SerializeField]
     private double _lineDuration;
 
-    [SerializeField]
-    List<Line> _scriptedLines;
-
     private void Awake()
     {
         _lines = new Stack<Line>();
@@ -60,14 +57,18 @@ public class LineManager : MonoBehaviour
             _lines.Push(line);
         }
 
-        if (_scriptedLines != null)
+    }
+
+    public void AddScriptedLines(List<Line> scriptedLines)
+    {
+        if (scriptedLines != null)
         {
-            foreach (Line line in _scriptedLines)
+            scriptedLines.Reverse();
+            foreach (Line line in scriptedLines)
             {
                 _lines.Push(line);
             }
         }
-
     }
 
     public List<Line> GetLines(int numLines)
@@ -107,5 +108,10 @@ public class LineManager : MonoBehaviour
             lines[k] = lines[n];
             lines[n] = value;
         }
+    }
+
+    public void ResetLines()
+    {
+        _lines = new Stack<Line>();
     }
 }
