@@ -86,7 +86,7 @@ public class GameManager : MonoBehaviour
             _lineManager.AddScriptedLines(config.GetScriptedLines());
             _panelControl.Init(config.GetC2Active(), config.GetDrumsActive(), config.GetLightsActive());
             _sceneryManager.Init(config.GetLightsActive(), config.GetC2Active());
-            //_audienceManager.GenerateAudience(config.GetAudienceMembersCount());
+            _audienceManager.GenerateAudience(config.GetAudienceMembersCount());
     }
 
     //public void InitNextLevel()
@@ -110,11 +110,11 @@ public class GameManager : MonoBehaviour
         } 
         while (_lineManager == null);
 
-        //do
-        //{ 
-        //    _audienceManager = GameObject.Find("AudienceManager").GetComponent<AudienceManager>();
-        //}
-        //while (_audienceManager == null);
+        do
+        {
+            _audienceManager = GameObject.Find("AudienceManager").GetComponent<AudienceManager>();
+        }
+        while (_audienceManager == null);
 
         do
         {
