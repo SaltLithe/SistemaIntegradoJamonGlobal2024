@@ -15,6 +15,6 @@ MonoBehaviour:
   generatedLinesAmmount: 5
   allowedGeneratedLineTypes: 0000000001000000
   C2Active: 0
-  drumsActive: 0
+  drumsActive: 1
   lightsActive: 0
   audienceMembersCount: 40
