@@ -14,7 +14,14 @@ public class DialogueTrigger : MonoBehaviour
 
     public void TriggerDialogue()
     {
-        FindObjectOfType<DialogueManager>().StartDialogue(dialogues[_currentDialogue]);
-        _currentDialogue++;
+        if (_currentDialogue > dialogues.Count)
+        {
+            FindObjectOfType<DialogueManager>().StartDialogue(dialogues[0]);
+        }
+        else
+        {
+            FindObjectOfType<DialogueManager>().StartDialogue(dialogues[_currentDialogue]);
+            _currentDialogue++;
+        }
     }
 }

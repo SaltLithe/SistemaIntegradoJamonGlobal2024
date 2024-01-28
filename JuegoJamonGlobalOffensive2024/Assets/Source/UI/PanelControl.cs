@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -31,6 +32,7 @@ public class PanelControl : MonoBehaviour
     [SerializeField] private GameObject _lineUIPrefabP2;
     [SerializeField] private Transform _telePrompterLinesParent;
     [SerializeField] private Transform _canvasParent;
+    [SerializeField] private TMP_Text _playerInteresttxt;
 
     [SerializeField] private float _errorParafernalia;
     [SerializeField] private float _errorMicrofono;
@@ -54,6 +56,13 @@ public class PanelControl : MonoBehaviour
         _lightLeftP2.onValueChanged.RemoveAllListeners();
         _lightRightP2.onValueChanged.RemoveAllListeners();
         _lightStopP2.onValueChanged.RemoveAllListeners();
+
+        GameManager.Exit += UpdatePlayerInterest;
+    }
+
+    private void UpdatePlayerInterest(float obj)
+    {
+        _playerInteresttxt.text = $"{obj * 100} %";
     }
 
     private void ParafernaliaPressed()
@@ -65,6 +74,7 @@ public class PanelControl : MonoBehaviour
 
     public void Init(bool c2Active, bool bateriaActive, bool lightsActive)
     {
+        _playerInteresttxt.text = "100 %";
         _parafernaliaButton.onClick.AddListener(ParafernaliaPressed);
         _microfonoButtonP1.onValueChanged.AddListener(PressMicrofonoP1);
         if (c2Active) _microfonoButtonP2.onValueChanged.AddListener(PressMicrofonoP2);
@@ -254,8 +264,19 @@ public class PanelControl : MonoBehaviour
 
         //Reset Line Control
         _currentLine = lines.First();
-        AudioManager.Instance.StopVoice();
-        AudioManager.Instance.PlayVoice(_currentLine.IsComedian1() ? Character.Cass : Character.Delilah, UnityEngine.Random.Range(0, 7));
+        
+        if (_showActive)
+        {
+            AudioManager.Instance.StopVoice();
+            if (_mic1Activated && _currentLine.IsComedian1())
+            {
+                AudioManager.Instance.PlayVoice(Character.Cass, UnityEngine.Random.Range(0, 7));
+            }
+            else if (_mic2Activated && !_currentLine.IsComedian1())
+            {
+                AudioManager.Instance.PlayVoice(Character.Delilah, UnityEngine.Random.Range(0, 7));
+            }
+        }
         _currentLineMaxTime = _currentLine.GetDuration();
         _currentLineCounter = 0;
         _currentLinePercentage = 0;
