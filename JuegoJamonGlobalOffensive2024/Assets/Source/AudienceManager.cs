@@ -141,6 +141,8 @@ public class AudienceManager : MonoBehaviour
             int exitCount = (int)Mathf.Floor(_audienceMembers.Count * exitPercentage);
             List<int> randomExits = GenerateRandomActions(exitCount, _audienceMembers.Keys.ToList());
 
+            AudioManager.Instance.PlayJeer();
+
             foreach (int exitCandidate in randomExits)
             {
                 var toDestroy = _audienceMembers[exitCandidate];

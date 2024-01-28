@@ -63,6 +63,5 @@ MonoBehaviour:
   delilahVoices: []
   cassVoices: []
   laughters: []
-  whispers:
-  - {fileID: 8300000, guid: f80cad48dbe9a454d971104569e6395e, type: 3}
+  whispers: {fileID: 8300000, guid: f80cad48dbe9a454d971104569e6395e, type: 3}
   abucheo: {fileID: 8300000, guid: 8cec3874fd48e6b4a8d54af972570863, type: 3}
