@@ -44,11 +44,11 @@ public class InterLevelCanvas : MonoBehaviour
 
     public void NextButtonPressed()
     {
-        if (_canLoad && _currentSprite < _sprites.Length - 1) 
+        if (_canLoad && _currentSprite < _sprites.Length) 
         {
             SceneManager.LoadScene(_gameSceneIndex);
         }
-        else if(_currentSprite >= _sprites.Length - 1)
+        else if(_currentSprite >= _sprites.Length)
         {
             SceneManager.LoadScene(_mainMenuIndex);
         }

@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10cdb0180df34434b9aeb85dbe8757e5, type: 3}
   m_Name: LevelConfiguration 1
   m_EditorClassIdentifier: 
-  generatedLinesAmmount: 5
+  generatedLinesAmmount: 10
   allowedGeneratedLineTypes: 010000000000000002000000
-  C2Active: 1
+  C2Active: 0
   drumsActive: 1
   lightsActive: 0
-  audienceMembersCount: 69
+  audienceMembersCount: 40

@@ -30,10 +30,8 @@ public class SceneryManager : MonoBehaviour
         if (!canUseC2) 
         {
             _c2Object.gameObject.SetActive(false);
+            _lightC2Object.gameObject.SetActive(false);
         }
-
-        StopAllCoroutines();
-        StartCoroutine(TriggerRandomSceneEvents());
     }
 
     IEnumerator TriggerRandomSceneEvents()
@@ -42,7 +40,7 @@ public class SceneryManager : MonoBehaviour
         {
             yield return new WaitForSeconds(Random.Range(2f, 3f));
 
-            if(Random.Range(0f, 1f) >= 0)
+            if(Random.Range(0f, 1f) >= .7f)
             {
                 if (Random.Range(0f, 1f) >= .5f)
                 {
@@ -72,7 +70,9 @@ public class SceneryManager : MonoBehaviour
         switch (action)
         {
             case PlayerAction.Parafernalia:
-                if (_parafernaliaObject) _parafernaliaObject.ReceiveInformation(information);
+                //if (_parafernaliaObject) _parafernaliaObject.ReceiveInformation(information);
+                StopAllCoroutines();
+                StartCoroutine(TriggerRandomSceneEvents());
                 break;
             case PlayerAction.Battery:
                 if (_batteryObject) _batteryObject.ReceiveInformation(information);
