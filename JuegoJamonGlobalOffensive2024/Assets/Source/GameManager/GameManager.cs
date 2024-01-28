@@ -50,6 +50,7 @@ public class GameManager : MonoBehaviour
     {
         InitLevel();
         _fadeToBlackCanvas.GetComponent<FadeToBlack>().ActivateFade(true, _fadeDuration, 0);
+        AudioManager.Instance.StartMonologueMusic();
     }
 
     // Update is called once per frame

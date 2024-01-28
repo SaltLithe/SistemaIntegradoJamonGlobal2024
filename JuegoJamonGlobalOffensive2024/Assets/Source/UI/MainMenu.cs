@@ -12,6 +12,10 @@ public class MainMenu : MonoBehaviour
         _ButtonPlayGame.onClick.RemoveAllListeners();
         _ButtonPlayGame.onClick.AddListener(StartGame);
     }
+    private void Start()
+    {
+        AudioManager.Instance.StartMenuMusic();
+    }
 
     private void StartGame()
     {
