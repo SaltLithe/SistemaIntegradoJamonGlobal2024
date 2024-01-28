@@ -48,7 +48,7 @@ MonoBehaviour:
   clickNeutral: {fileID: 8300000, guid: 78672344dafb5c74d910923c8ee20e5c, type: 3}
   clickON: {fileID: 8300000, guid: 524fa60313bccc34aa150d45c6c574cd, type: 3}
   clickOFF: {fileID: 8300000, guid: 449e2b7a47337304585d4beace07edfc, type: 3}
-  redButton: {fileID: 0}
+  redButton: {fileID: 8300000, guid: 6c24c4e7e1341ab4fa5c5d5739b08854, type: 3}
   menuMusic: {fileID: 8300000, guid: c17a8af359f911f40a368eb67f4faa7d, type: 3}
   gameMusic: {fileID: 8300000, guid: d669219b5a613aa458613a7c4ca0efb3, type: 3}
   endingMusic: {fileID: 8300000, guid: d928fd123559fe24b8b5b0419a1cd5ea, type: 3}
