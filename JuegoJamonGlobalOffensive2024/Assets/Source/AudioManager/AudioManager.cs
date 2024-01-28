@@ -110,7 +110,6 @@ public class AudioManager : MonoBehaviour
         musicSource.loop = true;
 
         voicesSource = gameObject.AddComponent<AudioSource>();
-        voicesSource.clip = mrKVoices[0];
         voicesSource.outputAudioMixerGroup = VoicesGroup;
 
         laughSource = gameObject.AddComponent<AudioSource>();
@@ -168,22 +167,17 @@ public class AudioManager : MonoBehaviour
         //PlayWithFadeIn(clickOFF, 0.1f);
     }
 
-    public void PlayVoice(Character character) {
+    public void PlayVoice(Character character, int lineNum) {
         switch (character)
         {
             case Character.MrK:
-                if (mrKCount <= mrKVoices.Count)
-                    voicesSource.clip = mrKVoices[mrKCount++];
-                else
-                    Debug.Log("No quedan dialogos para mrK / mrKVoices se pasa de rango");
+                voicesSource.clip = mrKVoices[lineNum];
                 break;
             case Character.Cass:
-                int randomCassVoice = Random.Range(0, cassVoices.Count);
-                voicesSource.clip = cassVoices[randomCassVoice];
+                voicesSource.clip = cassVoices[lineNum];
                 break;
             case Character.Delilah: 
-                int randomDelVoice = Random.Range(0, delilahVoices.Count);
-                voicesSource.clip = delilahVoices[randomDelVoice];
+                voicesSource.clip = delilahVoices[lineNum];
                 break;
             default:
                 voicesSource.clip = null;
@@ -203,7 +197,7 @@ public class AudioManager : MonoBehaviour
             
     }
     public void StopVoice() {
-        if(voicesSource && voicesSource.clip)voicesSource.Stop();
+        if(voicesSource && voicesSource.clip && voicesSource.isPlaying)voicesSource.Stop();
     }
 
     public void StartMonologueMusic()
@@ -286,7 +280,6 @@ public class AudioManager : MonoBehaviour
     {
         whisperSource.Stop();
     }
-
     public void StopAll() 
     { 
         foreach (AudioSource aSource in audioSources)
