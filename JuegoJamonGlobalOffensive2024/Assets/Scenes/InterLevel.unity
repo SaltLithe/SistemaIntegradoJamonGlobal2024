@@ -708,8 +708,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7742244178084048517, guid: 25b285b67a40f7849835f83f15ee8140, type: 3}
       propertyPath: dialogues.Array.data[2].sentences.Array.data[1]
-      value: As you know, Mr Cass finds it difficult to climb to his seat, so we
-        thought we would let him <b>walk around the stage</b>.
+      value: It looks like Mr Cass is starting to feel more confident, so we thought
+        we would let him <b>walk around the stage</b>.
       objectReference: {fileID: 0}
     - target: {fileID: 7742244178084048517, guid: 25b285b67a40f7849835f83f15ee8140, type: 3}
       propertyPath: dialogues.Array.data[2].sentences.Array.data[2]
