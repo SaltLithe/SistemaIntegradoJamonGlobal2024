@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641275, b: 0.5748172, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -158,17 +158,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 874b35e1c78cb1c468ccf16e5d241e42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogue:
-    name: Mr Komedy
-    sentences:
-    - Hello! Welcome to my humble theatre, the Zoomedy Club! You will be in charge
-      of the microphone of our comedian, Mr Cass!
-    - You see, Mr Cass' sense of humour can sometimes be pretty bad, but I don't
-      want to hurt his feelings! If we want to keep this theatre going, I'll need
-      you to *mute his bad jokes* so our *audience doesn't leave.*
-    - I've already marked the *bad ones* in <YELLOW>. It'll be our little secret...
-      I'll trust you! Oh, I almost forgot. Remember to *press the red button in order
-      to start the show!*
+  dialogues: []
 --- !u!4 &46322126
 Transform:
   m_ObjectHideFlags: 0
@@ -196,12 +186,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 874b35e1c78cb1c468ccf16e5d241e42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogue:
-    name: Mr Komedy
-    sentences:
-    - Wow! I knew you were a nice addition! Would you like to share the ownership
-      of the theater with me? I truly think we can be good partners and bring laughs
-      and comedy wherever we go (with our brilliant comedians, of course)
+  dialogues: []
 --- !u!114 &46322128
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -214,18 +199,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 874b35e1c78cb1c468ccf16e5d241e42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogue:
-    name: Mr Komedy
-    sentences:
-    - That... didn't come out as expected. Now people hate our show, but I still
-      can't tell Mr Cass he's not funny... It would break his heart!
-    - And Ms Delilah? Only thinking about what she'd do to me makes my hair stand
-      up! I've reached the conclusion that the best way to solve problems is running
-      from them, so I've decided to *close the Zoomedy Club* forever.
-    - I'm sorry this feels so sudden, but I see no other solution... I wish you luck
-      in your next job, you were a... a really... you were a cool partner! I guess?
-      Also, please. Could you tell Ms Delilah? I'm sure she won't harm you! I mean,
-      I hope...
+  dialogues: []
 --- !u!114 &46322129
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -238,15 +212,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 874b35e1c78cb1c468ccf16e5d241e42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogue:
-    name: Mr Komedy
-    sentences:
-    - That... didn't come out as expected. Now people hate our show, but I still
-      can't tell Mr Cass he's not funny... It would break his heart!
-    - I've reached the conclusion that the best way to solve problems is running
-      from them, so I've decided to *close the Zoomedy Club* forever.
-    - I'm sorry this feels so sudden, but I see no other solution... I wish you luck
-      in your next job, you were a... a really... you were a cool partner! I guess?
+  dialogues: []
 --- !u!114 &46322130
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -259,18 +225,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 874b35e1c78cb1c468ccf16e5d241e42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogue:
-    name: Mr Komedy
-    sentences:
-    - Hi! I could not thank you enough. Now the Zoomedy Club is amongst the most
-      famous comedy theatres in the country! To celebrate, I thought we could really
-      take advantage of our newfound fame and hire a *second comedian!*
-    - From now on, Ms Delilah will also be acting besides Mr Cass. If I'm honest
-      with you, sometimes her humour is a little... dark. But she looked so intimidating
-      I just had to hire her...
-    - Please, do the same things that you do with Mr Cass and *mute her microphone*.
-      This time, I marked the *bad jokes* in <PURPLE>. Also, *both comedians have
-      their own lights*, keep it in mind!
+  dialogues: []
 --- !u!114 &46322131
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -283,15 +238,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 874b35e1c78cb1c468ccf16e5d241e42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogue:
-    name: Mr Komedy
-    sentences:
-    - Hi! The theatre is growing without limit, you're making me think maybe it's
-      you who should run things around here! We must fulfill expectations, so I added
-      some new functions to your table.
-    - As you know, Mr Cass finds it difficult to climb to his seat, so we thought
-      we would let him *walk around the stage*. Now we only need you to *keep the
-      light pointing at him AT EVERY MOMENT*. I know you can do it!
+  dialogues: []
 --- !u!114 &46322132
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -304,16 +251,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 874b35e1c78cb1c468ccf16e5d241e42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogue:
-    name: Mr Komedy
-    sentences:
-    - Hello! You're doing such a great job, so I thought that we could add Mr. Axoslow
-      to our little team.
-    - He's going to *play the drums* when you tell him, so now everyone will know
-      when to laugh, like in those modern TV shows! I've *marked the EXACT POINTS*
-      where I need you to signal Mr. Axoslow, so make sure to follow the script!
-    - I've *marked the EXACT POINTS* where I need you to signal Mr. Axoslow, so make
-      sure to follow the script!
+  dialogues: []
 --- !u!1 &55512936
 GameObject:
   m_ObjectHideFlags: 0
@@ -480,6 +418,10 @@ MonoBehaviour:
   _lightLeftP2: {fileID: 1984568778}
   _lightRightP2: {fileID: 473537214}
   _lightStopP2: {fileID: 79170569}
+  _lightC1ON: {fileID: 0}
+  _lightC1OFF: {fileID: 0}
+  _lightC2ON: {fileID: 0}
+  _lightC2OFF: {fileID: 0}
   _lineUIPrefabP1: {fileID: 3297145108532011458, guid: f7d4922f2ba20064e8c8055dddf8c9aa, type: 3}
   _lineUIPrefabP2: {fileID: 3297145108532011458, guid: 8984777e2896c6342b98fff869f8b834, type: 3}
   _telePrompterLinesParent: {fileID: 281044266}
@@ -725,15 +667,15 @@ MonoBehaviour:
       m_Calls: []
   m_text: Continue
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: d4afecdef3c3eb541a95111b52b3f2b8, type: 2}
+  m_sharedMaterial: {fileID: 5631455752640253743, guid: d4afecdef3c3eb541a95111b52b3f2b8, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4281479730
-  m_fontColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+    rgba: 4292903935
+  m_fontColor: {r: 1, g: 0.5137255, b: 0.8784314, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -750,8 +692,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24
-  m_fontSizeBase: 24
+  m_fontSize: 16.8
+  m_fontSizeBase: 16.8
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -3290,9 +3232,9 @@ MonoBehaviour:
     m_SelectOnRight: {fileID: 0}
   m_Transition: 1
   m_Colors:
-    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_NormalColor: {r: 0, g: 0, b: 0, a: 0.6039216}
+    m_HighlightedColor: {r: 0, g: 0, b: 0, a: 1}
+    m_PressedColor: {r: 0, g: 0, b: 0, a: 0.8509804}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
     m_ColorMultiplier: 1
