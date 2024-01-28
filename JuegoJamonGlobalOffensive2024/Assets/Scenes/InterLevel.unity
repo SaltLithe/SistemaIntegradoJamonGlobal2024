@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657874, g: 0.49641275, b: 0.5748172, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -735,7 +735,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7742244178084048517, guid: 25b285b67a40f7849835f83f15ee8140, type: 3}
       propertyPath: dialogues.Array.data[3].sentences.Array.size
-      value: 3
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7742244178084048517, guid: 25b285b67a40f7849835f83f15ee8140, type: 3}
       propertyPath: dialogues.Array.data[4].sentences.Array.size
@@ -808,15 +808,22 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7742244178084048517, guid: 25b285b67a40f7849835f83f15ee8140, type: 3}
       propertyPath: dialogues.Array.data[3].sentences.Array.data[1]
-      value: From now on, Ms Delilah will also be acting besides Mr Cass. If I'm
-        honest with you, sometimes her humour is a little... dark. But she looked
-        so intimidating I just had to hire her...
+      value: From now on, Ms Delilah will also be acting besides Mr Cass.
       objectReference: {fileID: 0}
     - target: {fileID: 7742244178084048517, guid: 25b285b67a40f7849835f83f15ee8140, type: 3}
       propertyPath: dialogues.Array.data[3].sentences.Array.data[2]
-      value: 'Please, do the same things that you do with Mr Cass and <b>mute her
-        microphone<b>. This time, I marked the <b>bad jokes</b> in PURPLE. Also,
-        <b>both comedians have their own lights</b>, keep it in mind! '
+      value: If I'm honest with you, sometimes her humour is a little... dark. But
+        she looked so intimidating I just had to hire her...
+      objectReference: {fileID: 0}
+    - target: {fileID: 7742244178084048517, guid: 25b285b67a40f7849835f83f15ee8140, type: 3}
+      propertyPath: dialogues.Array.data[3].sentences.Array.data[3]
+      value: Please, do the same things that you do with Mr Cass and <b>mute her
+        microphone<b>.
+      objectReference: {fileID: 0}
+    - target: {fileID: 7742244178084048517, guid: 25b285b67a40f7849835f83f15ee8140, type: 3}
+      propertyPath: dialogues.Array.data[3].sentences.Array.data[4]
+      value: 'This time, I marked the <b>bad jokes</b> in PURPLE. Also, <b>both comedians
+        have their own lights</b>, keep it in mind! '
       objectReference: {fileID: 0}
     - target: {fileID: 7742244178084048517, guid: 25b285b67a40f7849835f83f15ee8140, type: 3}
       propertyPath: dialogues.Array.data[4].sentences.Array.data[0]
