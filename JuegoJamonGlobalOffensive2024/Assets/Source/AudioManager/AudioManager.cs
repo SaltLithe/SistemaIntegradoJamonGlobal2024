@@ -37,21 +37,6 @@ public class AudioManager : MonoBehaviour
         {
             instance = this;
             DontDestroyOnLoad(gameObject);
-
-            // Inicializar la lista de AudioSources
-            audioSources = new List<AudioSource>
-            {
-                drumsSource,
-                clickNeutralSource,
-                clickONSource,
-                clickOFFSource,
-                redButtonSource,
-                voicesSource,
-                musicSource,
-                laughSource,
-                jeerSource,
-                whisperSource
-            };
         }
         else
         {
@@ -125,7 +110,6 @@ public class AudioManager : MonoBehaviour
         musicSource.loop = true;
 
         voicesSource = gameObject.AddComponent<AudioSource>();
-        voicesSource.clip = mrKVoices[0];
         voicesSource.outputAudioMixerGroup = VoicesGroup;
 
         laughSource = gameObject.AddComponent<AudioSource>();
@@ -138,6 +122,21 @@ public class AudioManager : MonoBehaviour
         whisperSource = gameObject.AddComponent<AudioSource>();
         whisperSource.clip = whispers;
         whisperSource.outputAudioMixerGroup= SFXGroup;
+
+        // Inicializar la lista de AudioSources
+        audioSources = new List<AudioSource>
+            {
+                drumsSource,
+                clickNeutralSource,
+                clickONSource,
+                clickOFFSource,
+                redButtonSource,
+                voicesSource,
+                musicSource,
+                laughSource,
+                jeerSource,
+                whisperSource
+            };
     }
 
 
@@ -168,22 +167,17 @@ public class AudioManager : MonoBehaviour
         //PlayWithFadeIn(clickOFF, 0.1f);
     }
 
-    public void PlayVoice(Character character) {
+    public void PlayVoice(Character character, int lineNum) {
         switch (character)
         {
             case Character.MrK:
-                if (mrKCount <= mrKVoices.Count)
-                    voicesSource.clip = mrKVoices[mrKCount++];
-                else
-                    Debug.Log("No quedan dialogos para mrK / mrKVoices se pasa de rango");
+                voicesSource.clip = mrKVoices[lineNum];
                 break;
             case Character.Cass:
-                int randomCassVoice = Random.Range(0, cassVoices.Count);
-                voicesSource.clip = cassVoices[randomCassVoice];
+                voicesSource.clip = cassVoices[lineNum];
                 break;
             case Character.Delilah: 
-                int randomDelVoice = Random.Range(0, delilahVoices.Count);
-                voicesSource.clip = delilahVoices[randomDelVoice];
+                voicesSource.clip = delilahVoices[lineNum];
                 break;
             default:
                 voicesSource.clip = null;
@@ -203,7 +197,7 @@ public class AudioManager : MonoBehaviour
             
     }
     public void StopVoice() {
-        if(voicesSource && voicesSource.clip)voicesSource.Stop();
+        if(voicesSource && voicesSource.clip && voicesSource.isPlaying)voicesSource.Stop();
     }
 
     public void StartMonologueMusic()
@@ -239,24 +233,42 @@ public class AudioManager : MonoBehaviour
 
     public void PlayLaugh(int laugh)
     {
-        switch (laugh)
+        if(!laughSource.isPlaying)
         {
-            case 1:
-                laughSource.clip = laugh1;
-                break;
-            case 2:
-                laughSource.clip = laugh2;
-                break;
-            case 3:
-                laughSource.clip = laugh3;
-                break;
+            StopJeer();
+            switch (laugh)
+            {
+                case 1:
+                    laughSource.clip = laugh1;
+                    break;
+                case 2:
+                    laughSource.clip = laugh2;
+                    break;
+                case 3:
+                    laughSource.clip = laugh3;
+                    break;
+            }
+            laughSource.Play();
         }
-        laughSource.Play();
+    }
+
+    public void StopLaugh()
+    {
+        laughSource.Stop();
     }
 
     public void PlayJeer()
     {
-        jeerSource.Play();
+        if(!jeerSource.isPlaying)
+        {
+            StopLaugh();
+            jeerSource.Play();
+        }
+    }
+
+    public void StopJeer()
+    {
+        jeerSource.Stop();
     }
 
     public void PlayWhispers()
@@ -269,6 +281,10 @@ public class AudioManager : MonoBehaviour
         whisperSource.Stop();
     }
 
+    public void PlayRedButton() 
+    { 
+        redButtonSource.Play();
+    }
     public void StopAll() 
     { 
         foreach (AudioSource aSource in audioSources)
