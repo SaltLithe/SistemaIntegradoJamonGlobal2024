@@ -635,81 +635,52 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7742244178084048517, guid: 25b285b67a40f7849835f83f15ee8140, type: 3}
       propertyPath: dialogues.Array.size
-      value: 4
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7742244178084048517, guid: 25b285b67a40f7849835f83f15ee8140, type: 3}
       propertyPath: dialogues.Array.data[0].sentences.Array.size
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7742244178084048517, guid: 25b285b67a40f7849835f83f15ee8140, type: 3}
-      propertyPath: dialogues.Array.data[2].sentences.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 7742244178084048517, guid: 25b285b67a40f7849835f83f15ee8140, type: 3}
-      propertyPath: dialogues.Array.data[3].sentences.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 7742244178084048517, guid: 25b285b67a40f7849835f83f15ee8140, type: 3}
       propertyPath: dialogues.Array.data[0].sentences.Array.data[0]
-      value: Hello! Welcome to my humble theatre, the Zoomedy Club! You will be in
-        charge of the microphone of our comedian, Mr Cass!
+      value: That... didn't come out as expected. Now people hate our show, but I
+        still can't tell Mr Cass he's not funny... It would break his heart!
       objectReference: {fileID: 0}
     - target: {fileID: 7742244178084048517, guid: 25b285b67a40f7849835f83f15ee8140, type: 3}
       propertyPath: dialogues.Array.data[0].sentences.Array.data[1]
-      value: You see, Mr Cass' sense of humour can sometimes be pretty bad, but I
-        don't want to hurt his feelings! If we want to keep this theatre going, I'll
-        need you to *mute his bad jokes* so our *audience doesn't leave.*
+      value: And Ms Delilah? Only thinking about what she'd do to me makes my hair
+        stand up! I've reached the conclusion that the best way to solve problems
+        is running from them, so I've decided to *close the Zoomedy Club* forever.
       objectReference: {fileID: 0}
     - target: {fileID: 7742244178084048517, guid: 25b285b67a40f7849835f83f15ee8140, type: 3}
       propertyPath: dialogues.Array.data[0].sentences.Array.data[2]
-      value: I've already marked the *bad ones* in <YELLOW>. It'll be our little
-        secret... I'll trust you! Oh, I almost forgot. Remember to *press the red
-        button in order to start the show!*
+      value: I'm sorry this feels so sudden, but I see no other solution... I wish
+        you luck in your next job, you were a... a really... you were a cool partner!
+        I guess? Also, please. Could you tell Ms Delilah? I'm sure she won't harm
+        you! I mean, I hope...
       objectReference: {fileID: 0}
     - target: {fileID: 7742244178084048517, guid: 25b285b67a40f7849835f83f15ee8140, type: 3}
       propertyPath: dialogues.Array.data[1].sentences.Array.data[0]
-      value: Hello! You're doing such a great job, so I thought that we could add
-        Mr. Axoslow to our little team.
+      value: That... didn't come out as expected. Now people hate our show, but I
+        still can't tell Mr Cass he's not funny... It would break his heart!
       objectReference: {fileID: 0}
     - target: {fileID: 7742244178084048517, guid: 25b285b67a40f7849835f83f15ee8140, type: 3}
       propertyPath: dialogues.Array.data[1].sentences.Array.data[1]
-      value: He's going to *play the drums* when you tell him, so now everyone will
-        know when to laugh, like in those modern TV shows!
+      value: And Ms Delilah? Only thinking about what she'd do to me makes my hair
+        stand up! I've reached the conclusion that the best way to solve problems
+        is running from them, so I've decided to *close the Zoomedy Club* forever.
       objectReference: {fileID: 0}
     - target: {fileID: 7742244178084048517, guid: 25b285b67a40f7849835f83f15ee8140, type: 3}
       propertyPath: dialogues.Array.data[1].sentences.Array.data[2]
-      value: I've *marked the EXACT POINTS* where I need you to signal Mr. Axoslow,
-        so make sure to follow the script!
-      objectReference: {fileID: 0}
-    - target: {fileID: 7742244178084048517, guid: 25b285b67a40f7849835f83f15ee8140, type: 3}
-      propertyPath: dialogues.Array.data[2].sentences.Array.data[0]
-      value: Hi! The theatre is growing without limit, you're making me think maybe
-        it's you who should run things around here! We must fulfill expectations,
-        so I added some new functions to your table.
-      objectReference: {fileID: 0}
-    - target: {fileID: 7742244178084048517, guid: 25b285b67a40f7849835f83f15ee8140, type: 3}
-      propertyPath: dialogues.Array.data[2].sentences.Array.data[1]
-      value: As you know, Mr Cass finds it difficult to climb to his seat, so we
-        thought we would let him *walk around the stage*. Now we only need you to
-        *keep the light pointing at him AT EVERY MOMENT*. I know you can do it!
-      objectReference: {fileID: 0}
-    - target: {fileID: 7742244178084048517, guid: 25b285b67a40f7849835f83f15ee8140, type: 3}
-      propertyPath: dialogues.Array.data[3].sentences.Array.data[0]
-      value: Hi! I could not thank you enough. Now the Zoomedy Club is amongst the
-        most famous comedy theatres in the country! To celebrate, I thought we could
-        really take advantage of our newfound fame and hire a *second comedian!*
-      objectReference: {fileID: 0}
-    - target: {fileID: 7742244178084048517, guid: 25b285b67a40f7849835f83f15ee8140, type: 3}
-      propertyPath: dialogues.Array.data[3].sentences.Array.data[1]
-      value: From now on, Ms Delilah will also be acting besides Mr Cass. If I'm
-        honest with you, sometimes her humour is a little... dark. But she looked
-        so intimidating I just had to hire her...
+      value: I'm sorry this feels so sudden, but I see no other solution... I wish
+        you luck in your next job, you were a... a really... you were a cool partner!
+        I guess? Also, please. Could you tell Ms Delilah? I'm sure she won't harm
+        you! I mean, I hope...
       objectReference: {fileID: 0}
     - target: {fileID: 7742244178084048517, guid: 25b285b67a40f7849835f83f15ee8140, type: 3}
       propertyPath: dialogues.Array.data[3].sentences.Array.data[2]
-      value: 'Please, do the same things that you do with Mr Cass and *mute her microphone*.
-        This time, I marked the *bad jokes* in <PURPLE>. Also, *both comedians have
-        their own lights*, keep it in mind! '
+      value: I've *marked the EXACT POINTS* where I need you to signal Mr. Axoslow,
+        so make sure to follow the script!
       objectReference: {fileID: 0}
     - target: {fileID: 7742244178084048518, guid: 25b285b67a40f7849835f83f15ee8140, type: 3}
       propertyPath: m_RootOrder
