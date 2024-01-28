@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class DialogueTrigger : MonoBehaviour
 {
-    public Dialogue dialogue;
+    private static int _currentDialogue;
+    public List<Dialogue> dialogues;
+
     private void Start()
     {
         TriggerDialogue();
@@ -12,6 +14,7 @@ public class DialogueTrigger : MonoBehaviour
 
     public void TriggerDialogue()
     {
-        FindObjectOfType<DialogueManager>().StartDialogue(dialogue);
+        FindObjectOfType<DialogueManager>().StartDialogue(dialogues[_currentDialogue]);
+        _currentDialogue++;
     }
 }

@@ -3,9 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class DialogueManager : MonoBehaviour
 {
+    public static bool loadMainMenu;
+
     public TMP_Text nameText;
     public TMP_Text dialogueText;
 
@@ -26,11 +29,9 @@ public class DialogueManager : MonoBehaviour
         {
             sentences.Enqueue(sentence);
         }
-            DisplayNextSentence();
+        DisplayNextSentence();
     }
     
-
-
 
     public void DisplayNextSentence()
     {
@@ -47,6 +48,7 @@ public class DialogueManager : MonoBehaviour
 
     void EndDialogue()
     {
+        SceneManager.LoadScene(loadMainMenu ? "MainMenu" : "Game");
         Debug.Log("End of conversation");
     }
 }

@@ -30,28 +30,8 @@ public class InterLevelCanvas : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _image.sprite = _sprites[_currentSprite];
-        _currentSprite++;
         _fadeCanvas.GetComponent<FadeToBlack>().ActivateFade(true, _duration, 0);
-        StartCoroutine(WaitCoroutine(_duration));
         _canLoad = true;
         AudioManager.Instance.StopMusic();
-    }
-
-    IEnumerator WaitCoroutine(float seconds)
-    {
-        yield return new WaitForSeconds(seconds);
-    }
-
-    public void NextButtonPressed()
-    {
-        if (_canLoad && _currentSprite < _sprites.Length) 
-        {
-            SceneManager.LoadScene(_gameSceneIndex);
-        }
-        else if(_currentSprite >= _sprites.Length)
-        {
-            SceneManager.LoadScene(_mainMenuIndex);
-        }
     }
 }
