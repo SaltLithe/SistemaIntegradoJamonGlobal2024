@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -639,14 +639,22 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7742244178084048517, guid: 25b285b67a40f7849835f83f15ee8140, type: 3}
       propertyPath: dialogues.Array.data[0].sentences.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7742244178084048517, guid: 25b285b67a40f7849835f83f15ee8140, type: 3}
+      propertyPath: dialogues.Array.data[1].sentences.Array.size
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7742244178084048517, guid: 25b285b67a40f7849835f83f15ee8140, type: 3}
       propertyPath: dialogues.Array.data[2].sentences.Array.size
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7742244178084048517, guid: 25b285b67a40f7849835f83f15ee8140, type: 3}
       propertyPath: dialogues.Array.data[3].sentences.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7742244178084048517, guid: 25b285b67a40f7849835f83f15ee8140, type: 3}
+      propertyPath: dialogues.Array.data[4].sentences.Array.size
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7742244178084048517, guid: 25b285b67a40f7849835f83f15ee8140, type: 3}
@@ -657,14 +665,18 @@ PrefabInstance:
     - target: {fileID: 7742244178084048517, guid: 25b285b67a40f7849835f83f15ee8140, type: 3}
       propertyPath: dialogues.Array.data[0].sentences.Array.data[1]
       value: You see, Mr Cass' sense of humour can sometimes be pretty bad, but I
-        don't want to hurt his feelings! If we want to keep this theatre going, I'll
-        need you to *mute his bad jokes* so our *audience doesn't leave.*
+        don't want to hurt his feelings!
       objectReference: {fileID: 0}
     - target: {fileID: 7742244178084048517, guid: 25b285b67a40f7849835f83f15ee8140, type: 3}
       propertyPath: dialogues.Array.data[0].sentences.Array.data[2]
-      value: I've already marked the *bad ones* in <YELLOW>. It'll be our little
-        secret... I'll trust you! Oh, I almost forgot. Remember to *press the red
-        button in order to start the show!*
+      value: If we want to keep this theatre going, I'll need you to <b>mute his
+        bad jokes</b> so our <b>audience doesn't leave.</b>
+      objectReference: {fileID: 0}
+    - target: {fileID: 7742244178084048517, guid: 25b285b67a40f7849835f83f15ee8140, type: 3}
+      propertyPath: dialogues.Array.data[0].sentences.Array.data[3]
+      value: I've already marked the <b>bad ones</b> in YELLOW. It'll be our little
+        secret... I'll trust you! Oh, I almost forgot. Remember to <b>press the red
+        button in order to start the show!</b>
       objectReference: {fileID: 0}
     - target: {fileID: 7742244178084048517, guid: 25b285b67a40f7849835f83f15ee8140, type: 3}
       propertyPath: dialogues.Array.data[1].sentences.Array.data[0]
@@ -673,31 +685,42 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7742244178084048517, guid: 25b285b67a40f7849835f83f15ee8140, type: 3}
       propertyPath: dialogues.Array.data[1].sentences.Array.data[1]
-      value: He's going to *play the drums* when you tell him, so now everyone will
-        know when to laugh, like in those modern TV shows!
+      value: He's going to <b>play the drums when you press the button above the
+        prompter</b>, so now everyone will know when to laugh, like in those modern
+        TV shows!
       objectReference: {fileID: 0}
     - target: {fileID: 7742244178084048517, guid: 25b285b67a40f7849835f83f15ee8140, type: 3}
       propertyPath: dialogues.Array.data[1].sentences.Array.data[2]
-      value: I've *marked the EXACT POINTS* where I need you to signal Mr. Axoslow,
+      value: I've <b>marked the EXACT POINTS</b> where I need you to signal Mr. Axoslow,
         so make sure to follow the script!
+      objectReference: {fileID: 0}
+    - target: {fileID: 7742244178084048517, guid: 25b285b67a40f7849835f83f15ee8140, type: 3}
+      propertyPath: dialogues.Array.data[1].sentences.Array.data[3]
+      value: I've already marked the <b>bad ones</b> in YELLOW. It'll be our little
+        secret... I'll trust you! Oh, I almost forgot. Remember to <b>press the red
+        button in order to start the show!</b>
       objectReference: {fileID: 0}
     - target: {fileID: 7742244178084048517, guid: 25b285b67a40f7849835f83f15ee8140, type: 3}
       propertyPath: dialogues.Array.data[2].sentences.Array.data[0]
       value: Hi! The theatre is growing without limit, you're making me think maybe
         it's you who should run things around here! We must fulfill expectations,
-        so I added some new functions to your table.
+        so I unblocked some new functions to your table.
       objectReference: {fileID: 0}
     - target: {fileID: 7742244178084048517, guid: 25b285b67a40f7849835f83f15ee8140, type: 3}
       propertyPath: dialogues.Array.data[2].sentences.Array.data[1]
       value: As you know, Mr Cass finds it difficult to climb to his seat, so we
-        thought we would let him *walk around the stage*. Now we only need you to
-        *keep the light pointing at him AT EVERY MOMENT*. I know you can do it!
+        thought we would let him <b>walk around the stage</b>.
+      objectReference: {fileID: 0}
+    - target: {fileID: 7742244178084048517, guid: 25b285b67a40f7849835f83f15ee8140, type: 3}
+      propertyPath: dialogues.Array.data[2].sentences.Array.data[2]
+      value: Now we only need you to <b>keep the light pointing at him AT EVERY MOMENT</b>.
+        I know you can do it!
       objectReference: {fileID: 0}
     - target: {fileID: 7742244178084048517, guid: 25b285b67a40f7849835f83f15ee8140, type: 3}
       propertyPath: dialogues.Array.data[3].sentences.Array.data[0]
       value: Hi! I could not thank you enough. Now the Zoomedy Club is amongst the
         most famous comedy theatres in the country! To celebrate, I thought we could
-        really take advantage of our newfound fame and hire a *second comedian!*
+        really take advantage of our newfound fame and hire a <b>second comedian!</b>
       objectReference: {fileID: 0}
     - target: {fileID: 7742244178084048517, guid: 25b285b67a40f7849835f83f15ee8140, type: 3}
       propertyPath: dialogues.Array.data[3].sentences.Array.data[1]
@@ -707,9 +730,33 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7742244178084048517, guid: 25b285b67a40f7849835f83f15ee8140, type: 3}
       propertyPath: dialogues.Array.data[3].sentences.Array.data[2]
+      value: 'Please, do the same things that you do with Mr Cass and <b>mute her
+        microphone<b>. This time, I marked the <b>bad jokes</b> in PURPLE. Also,
+        <b>both comedians have their own lights</b>, keep it in mind! '
+      objectReference: {fileID: 0}
+    - target: {fileID: 7742244178084048517, guid: 25b285b67a40f7849835f83f15ee8140, type: 3}
+      propertyPath: dialogues.Array.data[4].sentences.Array.data[0]
+      value: Hi! I could not thank you enough. Now the Zoomedy Club is amongst the
+        most famous comedy theatres in the country! To celebrate, I thought we could
+        really take advantage of our newfound fame and hire a *second comedian!*
+      objectReference: {fileID: 0}
+    - target: {fileID: 7742244178084048517, guid: 25b285b67a40f7849835f83f15ee8140, type: 3}
+      propertyPath: dialogues.Array.data[4].sentences.Array.data[1]
+      value: From now on, Ms Delilah will also be acting besides Mr Cass. If I'm
+        honest with you, sometimes her humour is a little... dark. But she looked
+        so intimidating I just had to hire her...
+      objectReference: {fileID: 0}
+    - target: {fileID: 7742244178084048517, guid: 25b285b67a40f7849835f83f15ee8140, type: 3}
+      propertyPath: dialogues.Array.data[4].sentences.Array.data[2]
       value: 'Please, do the same things that you do with Mr Cass and *mute her microphone*.
         This time, I marked the *bad jokes* in <PURPLE>. Also, *both comedians have
         their own lights*, keep it in mind! '
+      objectReference: {fileID: 0}
+    - target: {fileID: 7742244178084048517, guid: 25b285b67a40f7849835f83f15ee8140, type: 3}
+      propertyPath: dialogues.Array.data[4].sentences.Array.data[3]
+      value: I've already marked the <b>bad ones</b> in YELLOW. It'll be our little
+        secret... I'll trust you! Oh, I almost forgot. Remember to <b>press the red
+        button in order to start the show!</b>
       objectReference: {fileID: 0}
     - target: {fileID: 7742244178084048518, guid: 25b285b67a40f7849835f83f15ee8140, type: 3}
       propertyPath: m_RootOrder
