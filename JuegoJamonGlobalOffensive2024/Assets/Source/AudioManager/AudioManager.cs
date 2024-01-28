@@ -37,21 +37,6 @@ public class AudioManager : MonoBehaviour
         {
             instance = this;
             DontDestroyOnLoad(gameObject);
-
-            // Inicializar la lista de AudioSources
-            audioSources = new List<AudioSource>
-            {
-                drumsSource,
-                clickNeutralSource,
-                clickONSource,
-                clickOFFSource,
-                redButtonSource,
-                voicesSource,
-                musicSource,
-                laughSource,
-                jeerSource,
-                whisperSource
-            };
         }
         else
         {
@@ -138,6 +123,21 @@ public class AudioManager : MonoBehaviour
         whisperSource = gameObject.AddComponent<AudioSource>();
         whisperSource.clip = whispers;
         whisperSource.outputAudioMixerGroup= SFXGroup;
+
+        // Inicializar la lista de AudioSources
+        audioSources = new List<AudioSource>
+            {
+                drumsSource,
+                clickNeutralSource,
+                clickONSource,
+                clickOFFSource,
+                redButtonSource,
+                voicesSource,
+                musicSource,
+                laughSource,
+                jeerSource,
+                whisperSource
+            };
     }
 
 
@@ -239,24 +239,42 @@ public class AudioManager : MonoBehaviour
 
     public void PlayLaugh(int laugh)
     {
-        switch (laugh)
+        if(!laughSource.isPlaying)
         {
-            case 1:
-                laughSource.clip = laugh1;
-                break;
-            case 2:
-                laughSource.clip = laugh2;
-                break;
-            case 3:
-                laughSource.clip = laugh3;
-                break;
+            StopJeer();
+            switch (laugh)
+            {
+                case 1:
+                    laughSource.clip = laugh1;
+                    break;
+                case 2:
+                    laughSource.clip = laugh2;
+                    break;
+                case 3:
+                    laughSource.clip = laugh3;
+                    break;
+            }
+            laughSource.Play();
         }
-        laughSource.Play();
+    }
+
+    public void StopLaugh()
+    {
+        laughSource.Stop();
     }
 
     public void PlayJeer()
     {
-        jeerSource.Play();
+        if(!jeerSource.isPlaying)
+        {
+            StopLaugh();
+            jeerSource.Play();
+        }
+    }
+
+    public void StopJeer()
+    {
+        jeerSource.Stop();
     }
 
     public void PlayWhispers()
