@@ -227,6 +227,10 @@ PrefabInstance:
       value: DisplayNextSentence
       objectReference: {fileID: 0}
     - target: {fileID: 1712150135640724682, guid: 6b916591cc143f44abaef62583a1be8b, type: 3}
+      propertyPath: m_fontSize
+      value: 72
+      objectReference: {fileID: 0}
+    - target: {fileID: 1712150135640724682, guid: 6b916591cc143f44abaef62583a1be8b, type: 3}
       propertyPath: m_fontAsset
       value: 
       objectReference: {fileID: 11400000, guid: 16ecf93de0a28e44a8f81a980db3664b, type: 2}
@@ -234,6 +238,10 @@ PrefabInstance:
       propertyPath: m_sharedMaterial
       value: 
       objectReference: {fileID: 8867550980534169229, guid: 16ecf93de0a28e44a8f81a980db3664b, type: 2}
+    - target: {fileID: 1712150135640724682, guid: 6b916591cc143f44abaef62583a1be8b, type: 3}
+      propertyPath: m_enableAutoSizing
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1712150136010197574, guid: 6b916591cc143f44abaef62583a1be8b, type: 3}
       propertyPath: m_Name
       value: DialogueCanvas
