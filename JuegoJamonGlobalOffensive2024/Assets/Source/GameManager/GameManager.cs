@@ -139,6 +139,7 @@ public class GameManager : MonoBehaviour
     {
         _fadeToBlackCanvas.GetComponent<FadeToBlack>().ActivateFade(true, _fadeDuration, 1);
         StartCoroutine(WaitCoroutine(_fadeDuration));
+        AudioManager.Instance.StopAll();
         SceneManager.LoadScene(_winSceneIndex);
     }
 
@@ -146,6 +147,7 @@ public class GameManager : MonoBehaviour
     {
         _fadeToBlackCanvas.GetComponent<FadeToBlack>().ActivateFade(true, _fadeDuration, 1);
         StartCoroutine(WaitCoroutine(_fadeDuration));
+        AudioManager.Instance.StopAll();
         SceneManager.LoadScene(_failSceneIndex);
     }
 
