@@ -21,7 +21,7 @@ public class GameManager : MonoBehaviour
     private static Stack<LevelConfiguration> _levelConfigurations;
 
     [SerializeField]
-    private int _winSceneIndex, _failSceneKass, _failSceneKassDel;
+    private int _winSceneIndex, _winFinalSceneIndex, _failSceneKass, _failSceneKassDel;
 
     [SerializeField]
     private Canvas _fadeToBlackCanvas;
@@ -141,7 +141,16 @@ public class GameManager : MonoBehaviour
         _fadeToBlackCanvas.GetComponent<FadeToBlack>().ActivateFade(true, _fadeDuration, 1);
         StartCoroutine(WaitCoroutine(_fadeDuration));
         AudioManager.Instance.StopAll();
-        SceneManager.LoadScene(_winSceneIndex);
+        if (_currentLevel == 3)
+        {
+            DialogueManager.loadMainMenu = true;
+            SceneManager.LoadScene(_winFinalSceneIndex);
+        }
+        else
+        {
+            DialogueManager.loadMainMenu = false;
+            SceneManager.LoadScene(_winSceneIndex);
+        }
     }
 
     public void FinishLevelFail()
@@ -149,6 +158,7 @@ public class GameManager : MonoBehaviour
         _fadeToBlackCanvas.GetComponent<FadeToBlack>().ActivateFade(true, _fadeDuration, 1);
         StartCoroutine(WaitCoroutine(_fadeDuration));
         AudioManager.Instance.StopAll();
+        DialogueManager.loadMainMenu = true;
         if (_currentLevel == 2)
         {
             SceneManager.LoadScene(_failSceneKass);
