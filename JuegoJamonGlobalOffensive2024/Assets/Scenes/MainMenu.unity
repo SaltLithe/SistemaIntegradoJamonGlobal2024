@@ -152,7 +152,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b54c7310ec1b8740a84c1e85b11510e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _GameSceneName: Game
+  _GameSceneName: InterScene
   _ButtonPlayGame: {fileID: 655647899}
 --- !u!4 &441941069
 Transform:

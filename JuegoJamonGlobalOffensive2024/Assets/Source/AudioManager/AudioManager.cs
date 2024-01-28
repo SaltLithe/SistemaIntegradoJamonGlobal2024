@@ -47,7 +47,8 @@ public class AudioManager : MonoBehaviour
                 clickOFFSource,
                 voicesSource,
                 musicSource,
-                laughSource
+                laughSource,
+                jeerSource
             };
         }
         else
@@ -84,7 +85,7 @@ public class AudioManager : MonoBehaviour
     AudioSource voicesSource;
     AudioSource musicSource;
     AudioSource laughSource;
-    AudioSource laughSource;
+    AudioSource jeerSource;
 
 
     private void Start()
