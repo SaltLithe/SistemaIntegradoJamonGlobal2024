@@ -1497,6 +1497,10 @@ PrefabInstance:
       propertyPath: _mic2Activated
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6405616950696191309, guid: f277d33470e0f244598169dc6b77f104, type: 3}
+      propertyPath: _playerInteresttxt
+      value: 
+      objectReference: {fileID: 755769596}
     - target: {fileID: 6405616950696191310, guid: f277d33470e0f244598169dc6b77f104, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -2518,7 +2522,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6186389901760847302, guid: 839fbe61d922fe0468d2b5d6b7960972, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6186389901760847306, guid: 839fbe61d922fe0468d2b5d6b7960972, type: 3}
       propertyPath: m_Pivot.x
