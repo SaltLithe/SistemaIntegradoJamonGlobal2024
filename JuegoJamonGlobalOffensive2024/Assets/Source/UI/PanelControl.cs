@@ -23,6 +23,10 @@ public class PanelControl : MonoBehaviour
     [SerializeField] private Toggle _lightRightP2;
     [SerializeField] private Toggle _lightStopP2;
 
+    [SerializeField] private GameObject _lightC1ON;
+    [SerializeField] private GameObject _lightC1OFF;
+    [SerializeField] private GameObject _lightC2ON;
+    [SerializeField] private GameObject _lightC2OFF;
     [SerializeField] private GameObject _lineUIPrefabP1;
     [SerializeField] private GameObject _lineUIPrefabP2;
     [SerializeField] private Transform _telePrompterLinesParent;
@@ -111,9 +115,17 @@ public class PanelControl : MonoBehaviour
     private void PressMicrofonoP1(bool value)
     {
         if (_mic1Activated)
+        {
             AudioManager.Instance.PlayClickOFF();
+            _lightC1OFF.SetActive(true);
+            _lightC1ON.SetActive(false);
+        }
         else
+        {
             AudioManager.Instance.PlayClickON();
+            _lightC1ON.SetActive(true);
+            _lightC1OFF.SetActive(false);
+        }
 
         _mic1Activated = !_mic1Activated;
 
@@ -124,9 +136,17 @@ public class PanelControl : MonoBehaviour
     private void PressMicrofonoP2(bool value)
     {
         if (_mic2Activated)
+        {
             AudioManager.Instance.PlayClickOFF();
+            _lightC2OFF.SetActive(true);
+            _lightC2ON.SetActive(false);
+        }
         else
+        {
             AudioManager.Instance.PlayClickON();
+            _lightC2ON.SetActive(true);
+            _lightC2OFF.SetActive(false);
+        }
 
         _mic2Activated = !_mic2Activated;
         OnPlayerAction?.Invoke(PlayerAction.C2Microphone, null);
@@ -135,6 +155,10 @@ public class PanelControl : MonoBehaviour
 
     private void PressBateria()
     {
+        if(!_showActive) 
+        {
+            return;
+        }
         if (_currentLine.GetLineType() == E_LineType.DRUMS)
         {
             if ((_currentLineCounter > _currentLine.GetEventStamp() - .5f &&
