@@ -60,6 +60,7 @@ public class PanelControl : MonoBehaviour
     {
         _showActive = true;
         OnPlayerAction?.Invoke(PlayerAction.Parafernalia, null);
+        AudioManager.Instance.PlayRedButton();
     }
 
     public void Init(bool c2Active, bool bateriaActive, bool lightsActive)
@@ -253,6 +254,8 @@ public class PanelControl : MonoBehaviour
 
         //Reset Line Control
         _currentLine = lines.First();
+        AudioManager.Instance.StopVoice();
+        AudioManager.Instance.PlayVoice(_currentLine.IsComedian1() ? Character.Cass : Character.Delilah, UnityEngine.Random.Range(0, 7));
         _currentLineMaxTime = _currentLine.GetDuration();
         _currentLineCounter = 0;
         _currentLinePercentage = 0;
