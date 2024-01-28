@@ -67,4 +67,9 @@ public class Comedian : MonoBehaviour, ISceneryElement
         _targetPosition = _currentPosition;
         _currentPosition = baitPos;
     }
+
+    public float GetMovementSpeed()
+    {
+        return _movementSpeed;
+    }
 }
