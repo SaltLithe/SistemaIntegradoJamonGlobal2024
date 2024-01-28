@@ -62,7 +62,7 @@ public class PanelControl : MonoBehaviour
 
     private void UpdatePlayerInterest(float obj)
     {
-        _playerInteresttxt.text = $"{obj * 100} %";
+        _playerInteresttxt.text = $"{MathF.Truncate(obj * 100)} %";
     }
 
     private void ParafernaliaPressed()

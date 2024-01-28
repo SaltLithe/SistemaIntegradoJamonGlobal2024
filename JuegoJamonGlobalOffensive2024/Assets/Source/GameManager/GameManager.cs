@@ -141,7 +141,7 @@ public class GameManager : MonoBehaviour
         _fadeToBlackCanvas.GetComponent<FadeToBlack>().ActivateFade(true, _fadeDuration, 1);
         StartCoroutine(WaitCoroutine(_fadeDuration));
         AudioManager.Instance.StopAll();
-        if (_currentLevel >= 3)
+        if (_currentLevel >= 4)
         {
             DialogueManager.loadMainMenu = true;
             SceneManager.LoadScene(_winFinalSceneIndex);
@@ -159,11 +159,11 @@ public class GameManager : MonoBehaviour
         StartCoroutine(WaitCoroutine(_fadeDuration));
         AudioManager.Instance.StopAll();
         DialogueManager.loadMainMenu = true;
-        if (_currentLevel <= 2)
+        if (_currentLevel <= 3)
         {
             SceneManager.LoadScene(_failSceneKass);
         }
-        else if (_currentLevel >= 3)
+        else if (_currentLevel >= 4)
         {
             SceneManager.LoadScene(_failSceneKassDel);
         }
