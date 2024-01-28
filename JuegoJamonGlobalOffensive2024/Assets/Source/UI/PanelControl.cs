@@ -137,8 +137,8 @@ public class PanelControl : MonoBehaviour
     {
         if (_currentLine.GetLineType() == E_LineType.DRUMS)
         {
-            if ((_currentLineCounter > _currentLine.GetEventStamp() - .3f &&
-                _currentLineCounter < _currentLine.GetEventStamp() + .3f))
+            if ((_currentLineCounter > _currentLine.GetEventStamp() - .5f &&
+                _currentLineCounter < _currentLine.GetEventStamp() + .5f))
             {
                 Debug.Log("Battery pressed succesfully");
                 Success();

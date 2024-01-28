@@ -1,8 +1,8 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System.Collections;
-
-
+using UnityEngine.Audio;
+using System.Threading.Tasks;
 
 public enum Character{MrK, Cass, Delilah}
 
@@ -50,36 +50,60 @@ public class AudioManager : MonoBehaviour
     [SerializeField] AudioClip clickNeutral;
     [SerializeField] AudioClip clickON;
     [SerializeField] AudioClip clickOFF;
+    [SerializeField] AudioClip buttonComplete;
+
+    [SerializeField] AudioClip menuMusic;
+    [SerializeField] AudioClip gameMusic;
+    [SerializeField] AudioClip endingMusic;
+
+    [SerializeField] AudioMixerGroup SFXGroup, MusicGroup, VoicesGroup;
+
     int mrKCount = 0;
     [SerializeField] List<AudioClip> mrKVoices;
     [SerializeField] List<AudioClip> delilahVoices;
     [SerializeField] List<AudioClip> cassVoices;
+    [SerializeField] List<AudioClip> laughters;
+    [SerializeField] List<AudioClip> whispers;
+    [SerializeField] AudioClip abucheo;
 
      AudioSource drumsSource;
      AudioSource clickNeutralSource;
      AudioSource clickONSource;
      AudioSource clickOFFSource;
      AudioSource voicesSource;
+     AudioSource musicSource;
+
 
     private void Start()
     {
         drumsSource = gameObject.AddComponent<AudioSource>();
         drumsSource.clip = drumsClip;
+        drumsSource.outputAudioMixerGroup = SFXGroup;
 
         clickNeutralSource = gameObject.AddComponent<AudioSource>();
         clickNeutralSource.clip = clickNeutral;
+        clickNeutralSource.outputAudioMixerGroup = SFXGroup;
 
         clickONSource = gameObject.AddComponent<AudioSource>();
         clickONSource.clip = clickON;
+        clickONSource.outputAudioMixerGroup = SFXGroup;
 
         clickOFFSource = gameObject.AddComponent<AudioSource>();
         clickOFFSource.clip = clickOFF;
+        clickOFFSource.outputAudioMixerGroup = SFXGroup;
 
         drumsSource = gameObject.AddComponent<AudioSource>();
         drumsSource.clip = drumsClip;
+        drumsSource.outputAudioMixerGroup = SFXGroup;
+
+        musicSource = gameObject.AddComponent<AudioSource>();
+        musicSource.clip = menuMusic;
+        musicSource.outputAudioMixerGroup = MusicGroup;
+        musicSource.loop = true;
 
         voicesSource = gameObject.AddComponent<AudioSource>();
         drumsSource.clip = mrKVoices[0];
+        voicesSource.outputAudioMixerGroup = VoicesGroup;
     }
 
 
@@ -146,6 +170,37 @@ public class AudioManager : MonoBehaviour
     }
     public void StopVoice() {
         if(voicesSource && voicesSource.clip)voicesSource.Stop();
+    }
+
+    public void StartMonologueMusic()
+    {
+        musicSource.Stop();
+        musicSource.clip = gameMusic;
+        musicSource.Play();
+    }
+
+    public async void StartMenuMusic()
+    {
+        while(musicSource == null)
+        {
+            await Task.Delay(1000);
+        }
+
+        musicSource.Stop();
+        musicSource.clip = menuMusic;
+        musicSource.Play();
+    }
+
+    public void StartEndingMusic()
+    {
+        musicSource.Stop();
+        musicSource.clip = endingMusic;
+        musicSource.Play();
+    }
+
+    public void StopMusic()
+    {
+        musicSource.Stop();
     }
 
 

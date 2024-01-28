@@ -35,6 +35,7 @@ public class InterLevelCanvas : MonoBehaviour
         _fadeCanvas.GetComponent<FadeToBlack>().ActivateFade(true, _duration, 0);
         StartCoroutine(WaitCoroutine(_duration));
         _canLoad = true;
+        AudioManager.Instance.StopMusic();
     }
 
     IEnumerator WaitCoroutine(float seconds)
