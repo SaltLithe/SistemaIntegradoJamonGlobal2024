@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -489,7 +489,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4705581885997778170, guid: 11efec9568c537f4ab826bc9cf4a04c8, type: 3}
       propertyPath: _lineDuration
-      value: 3
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4705581885997778171, guid: 11efec9568c537f4ab826bc9cf4a04c8, type: 3}
       propertyPath: m_Name
@@ -1490,12 +1490,20 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 346082583}
     - target: {fileID: 6405616950696191309, guid: f277d33470e0f244598169dc6b77f104, type: 3}
+      propertyPath: _errorBateria
+      value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 6405616950696191309, guid: f277d33470e0f244598169dc6b77f104, type: 3}
       propertyPath: _mic1Activated
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6405616950696191309, guid: f277d33470e0f244598169dc6b77f104, type: 3}
       propertyPath: _mic2Activated
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6405616950696191309, guid: f277d33470e0f244598169dc6b77f104, type: 3}
+      propertyPath: _errorMicrofono
+      value: 0.05
       objectReference: {fileID: 0}
     - target: {fileID: 6405616950696191309, guid: f277d33470e0f244598169dc6b77f104, type: 3}
       propertyPath: _playerInteresttxt
