@@ -39,7 +39,19 @@ public class AudioManager : MonoBehaviour
             DontDestroyOnLoad(gameObject);
 
             // Inicializar la lista de AudioSources
-            audioSources = new List<AudioSource>();
+            audioSources = new List<AudioSource>
+            {
+                drumsSource,
+                clickNeutralSource,
+                clickONSource,
+                clickOFFSource,
+                redButtonSource,
+                voicesSource,
+                musicSource,
+                laughSource,
+                jeerSource,
+                whisperSource
+            };
         }
         else
         {
@@ -50,11 +62,16 @@ public class AudioManager : MonoBehaviour
     [SerializeField] AudioClip clickNeutral;
     [SerializeField] AudioClip clickON;
     [SerializeField] AudioClip clickOFF;
-    [SerializeField] AudioClip buttonComplete;
+    [SerializeField] AudioClip redButton;
 
     [SerializeField] AudioClip menuMusic;
     [SerializeField] AudioClip gameMusic;
     [SerializeField] AudioClip endingMusic;
+
+    [SerializeField] AudioClip laugh1, laugh2, laugh3;
+
+    [SerializeField] AudioClip whispers;
+    [SerializeField] AudioClip abucheo;
 
     [SerializeField] AudioMixerGroup SFXGroup, MusicGroup, VoicesGroup;
 
@@ -62,16 +79,18 @@ public class AudioManager : MonoBehaviour
     [SerializeField] List<AudioClip> mrKVoices;
     [SerializeField] List<AudioClip> delilahVoices;
     [SerializeField] List<AudioClip> cassVoices;
-    [SerializeField] List<AudioClip> laughters;
-    [SerializeField] List<AudioClip> whispers;
-    [SerializeField] AudioClip abucheo;
+    
 
-     AudioSource drumsSource;
-     AudioSource clickNeutralSource;
-     AudioSource clickONSource;
-     AudioSource clickOFFSource;
-     AudioSource voicesSource;
-     AudioSource musicSource;
+    AudioSource drumsSource;
+    AudioSource clickNeutralSource;
+    AudioSource clickONSource;
+    AudioSource clickOFFSource;
+    AudioSource redButtonSource;
+    AudioSource voicesSource;
+    AudioSource musicSource;
+    AudioSource laughSource;
+    AudioSource jeerSource;
+    AudioSource whisperSource;
 
 
     private void Start()
@@ -92,6 +111,10 @@ public class AudioManager : MonoBehaviour
         clickOFFSource.clip = clickOFF;
         clickOFFSource.outputAudioMixerGroup = SFXGroup;
 
+        redButtonSource = gameObject.AddComponent<AudioSource>();
+        redButtonSource.clip = redButton;
+        redButtonSource.outputAudioMixerGroup = SFXGroup;
+
         drumsSource = gameObject.AddComponent<AudioSource>();
         drumsSource.clip = drumsClip;
         drumsSource.outputAudioMixerGroup = SFXGroup;
@@ -102,8 +125,19 @@ public class AudioManager : MonoBehaviour
         musicSource.loop = true;
 
         voicesSource = gameObject.AddComponent<AudioSource>();
-        drumsSource.clip = mrKVoices[0];
+        voicesSource.clip = mrKVoices[0];
         voicesSource.outputAudioMixerGroup = VoicesGroup;
+
+        laughSource = gameObject.AddComponent<AudioSource>();
+        laughSource.outputAudioMixerGroup = SFXGroup;
+
+        jeerSource = gameObject.AddComponent<AudioSource>();
+        jeerSource.clip = abucheo;
+        jeerSource.outputAudioMixerGroup = SFXGroup;
+
+        whisperSource = gameObject.AddComponent<AudioSource>();
+        whisperSource.clip = whispers;
+        whisperSource.outputAudioMixerGroup= SFXGroup;
     }
 
 
@@ -201,6 +235,46 @@ public class AudioManager : MonoBehaviour
     public void StopMusic()
     {
         musicSource.Stop();
+    }
+
+    public void PlayLaugh(int laugh)
+    {
+        switch (laugh)
+        {
+            case 1:
+                laughSource.clip = laugh1;
+                break;
+            case 2:
+                laughSource.clip = laugh2;
+                break;
+            case 3:
+                laughSource.clip = laugh3;
+                break;
+        }
+        laughSource.Play();
+    }
+
+    public void PlayJeer()
+    {
+        jeerSource.Play();
+    }
+
+    public void PlayWhispers()
+    {
+        whisperSource.Play();
+    }
+
+    public void StopWhispers()
+    {
+        whisperSource.Stop();
+    }
+
+    public void StopAll() 
+    { 
+        foreach (AudioSource aSource in audioSources)
+        {
+            aSource.Stop();
+        }
     }
 
 

@@ -1,0 +1,86 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &7742244178084048516
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7742244178084048518}
+  - component: {fileID: 7742244178084048517}
+  m_Layer: 0
+  m_Name: DialogueTrigger
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7742244178084048518
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7742244178084048516}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 411.46445, y: 229.84877, z: 0.19830704}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7742244178084048517
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7742244178084048516}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 874b35e1c78cb1c468ccf16e5d241e42, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogues:
+  - name: Mr. Komedy
+    sentences: []
+  - name: Mr. Komedy
+    sentences:
+    - Hello! Welcome to my humble theatre, the Zoomedy Club! You will be in charge
+      of the microphone of our comedian, Mr Cass!
+    - You see, Mr Cass' sense of humour can sometimes be pretty bad, but I don't
+      want to hurt his feelings! If we want to keep this theatre going, I'll need
+      you to *mute his bad jokes* so our *audience doesn't leave.*
+    - I've already marked the *bad ones* in <YELLOW>. It'll be our little secret...
+      I'll trust you! Oh, I almost forgot. Remember to *press the red button in order
+      to start the show!*
+  - name: Mr. Komedy
+    sentences:
+    - Hello! You're doing such a great job, so I thought that we could add Mr. Axoslow
+      to our little team.
+    - He's going to *play the drums* when you tell him, so now everyone will know
+      when to laugh, like in those modern TV shows!
+    - I've *marked the EXACT POINTS* where I need you to signal Mr. Axoslow, so make
+      sure to follow the script!
+  - name: Mr. Komedy
+    sentences:
+    - Hi! The theatre is growing without limit, you're making me think maybe it's
+      you who should run things around here! We must fulfill expectations, so I added
+      some new functions to your table.
+    - As you know, Mr Cass finds it difficult to climb to his seat, so we thought
+      we would let him *walk around the stage*. Now we only need you to *keep the
+      light pointing at him AT EVERY MOMENT*. I know you can do it!
+  - name: Mr. Komedy
+    sentences:
+    - Hi! I could not thank you enough. Now the Zoomedy Club is amongst the most
+      famous comedy theatres in the country! To celebrate, I thought we could really
+      take advantage of our newfound fame and hire a *second comedian!*
+    - From now on, Ms Delilah will also be acting besides Mr Cass. If I'm honest
+      with you, sometimes her humour is a little... dark. But she looked so intimidating
+      I just had to hire her...
+    - 'Please, do the same things that you do with Mr Cass and *mute her microphone*.
+      This time, I marked the *bad jokes* in <PURPLE>. Also, *both comedians have
+      their own lights*, keep it in mind! '

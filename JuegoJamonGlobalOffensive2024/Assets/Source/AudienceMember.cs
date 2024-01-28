@@ -40,7 +40,6 @@ public class AudienceMember : MonoBehaviour
         {
             StartCoroutine(Tremble());
             _tryLaugh = false; 
-            
         }
     }
     IEnumerator Tremble()

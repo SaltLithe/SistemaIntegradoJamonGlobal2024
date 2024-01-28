@@ -112,6 +112,19 @@ public class AudienceManager : MonoBehaviour
         int laughCount = (int)Mathf.Floor(_audienceMembers.Count * laughPercent);
         List<int> randomLaughs = GenerateRandomActions(laughCount, _audienceMembers.Keys.ToList());
 
+        if(laughPercent <= 0.8f) 
+        {
+            AudioManager.Instance.PlayLaugh(3);
+        }
+        else if (laughPercent <= 0.9f)
+        {
+            AudioManager.Instance.PlayLaugh(2);
+        }
+        else if(laughPercent <= 1f)
+        {
+            AudioManager.Instance.PlayLaugh(1);
+        }
+
         foreach (int laughCandidate in randomLaughs) 
         {
             _audienceMembers[laughCandidate].GetComponent<AudienceMember>().Laugh(); 
@@ -128,6 +141,8 @@ public class AudienceManager : MonoBehaviour
             int exitCount = (int)Mathf.Floor(_audienceMembers.Count * exitPercentage);
             List<int> randomExits = GenerateRandomActions(exitCount, _audienceMembers.Keys.ToList());
 
+            AudioManager.Instance.PlayJeer();
+
             foreach (int exitCandidate in randomExits)
             {
                 var toDestroy = _audienceMembers[exitCandidate];
@@ -135,7 +150,7 @@ public class AudienceManager : MonoBehaviour
                 toDestroy.GetComponent<AudienceMember>().ExitAudience();
             }
 
-           
+            
         }
         else if (currentHealh <= _healthZeroMargin)
         {

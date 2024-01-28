@@ -48,12 +48,20 @@ MonoBehaviour:
   clickNeutral: {fileID: 8300000, guid: 78672344dafb5c74d910923c8ee20e5c, type: 3}
   clickON: {fileID: 8300000, guid: 524fa60313bccc34aa150d45c6c574cd, type: 3}
   clickOFF: {fileID: 8300000, guid: 449e2b7a47337304585d4beace07edfc, type: 3}
+  buttonComplete: {fileID: 0}
   menuMusic: {fileID: 8300000, guid: c17a8af359f911f40a368eb67f4faa7d, type: 3}
   gameMusic: {fileID: 8300000, guid: d669219b5a613aa458613a7c4ca0efb3, type: 3}
   endingMusic: {fileID: 8300000, guid: d928fd123559fe24b8b5b0419a1cd5ea, type: 3}
+  laugh1: {fileID: 8300000, guid: c7eb29f0196f90642b11823f2375f3d6, type: 3}
+  laugh2: {fileID: 8300000, guid: 3af978d022bdb224fb182ae14f258351, type: 3}
+  laugh3: {fileID: 8300000, guid: 38403d13cf7cbd14aa0f9e7dbe9ce32a, type: 3}
   SFXGroup: {fileID: 467376650489803228, guid: 40737eea4e964274dbff784a38f9206d, type: 2}
   MusicGroup: {fileID: -6646089925646930222, guid: 40737eea4e964274dbff784a38f9206d, type: 2}
   VoicesGroup: {fileID: 8350508880761740621, guid: 40737eea4e964274dbff784a38f9206d, type: 2}
-  mrKVoices: []
+  mrKVoices:
+  - {fileID: 8300000, guid: bac864c83dd4fed42a1318bfdd5175b2, type: 3}
   delilahVoices: []
   cassVoices: []
+  laughters: []
+  whispers: {fileID: 8300000, guid: f80cad48dbe9a454d971104569e6395e, type: 3}
+  abucheo: {fileID: 8300000, guid: 8cec3874fd48e6b4a8d54af972570863, type: 3}
