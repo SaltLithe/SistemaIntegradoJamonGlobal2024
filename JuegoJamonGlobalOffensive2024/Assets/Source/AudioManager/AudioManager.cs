@@ -280,6 +280,11 @@ public class AudioManager : MonoBehaviour
     {
         whisperSource.Stop();
     }
+
+    public void PlayRedButton() 
+    { 
+        redButtonSource.Play();
+    }
     public void StopAll() 
     { 
         foreach (AudioSource aSource in audioSources)
