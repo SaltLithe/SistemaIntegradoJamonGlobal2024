@@ -763,6 +763,11 @@ PrefabInstance:
         button in order to start the show!</b>
       objectReference: {fileID: 0}
     - target: {fileID: 7742244178084048517, guid: 25b285b67a40f7849835f83f15ee8140, type: 3}
+      propertyPath: dialogues.Array.data[0].sentences.Array.data[4]
+      value: This time, I marked the <b>bad jokes</b> in PURPLE. Also, <b>both comedians
+        have their own lights</b>, keep it in mind!
+      objectReference: {fileID: 0}
+    - target: {fileID: 7742244178084048517, guid: 25b285b67a40f7849835f83f15ee8140, type: 3}
       propertyPath: dialogues.Array.data[1].sentences.Array.data[0]
       value: Hello! You're doing such a great job, so I thought that we could add
         Mr. Axoslow to our little team.
@@ -822,8 +827,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7742244178084048517, guid: 25b285b67a40f7849835f83f15ee8140, type: 3}
       propertyPath: dialogues.Array.data[3].sentences.Array.data[4]
-      value: 'This time, I marked the <b>bad jokes</b> in PURPLE. Also, <b>both comedians
-        have their own lights</b>, keep it in mind! '
+      value: This time, I marked the <b>bad jokes</b> in PURPLE. Also, <b>both comedians
+        have their own lights</b>, keep it in mind!
       objectReference: {fileID: 0}
     - target: {fileID: 7742244178084048517, guid: 25b285b67a40f7849835f83f15ee8140, type: 3}
       propertyPath: dialogues.Array.data[4].sentences.Array.data[0]
