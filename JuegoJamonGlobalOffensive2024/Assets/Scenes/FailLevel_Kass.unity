@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -649,7 +649,7 @@ PrefabInstance:
     - target: {fileID: 7742244178084048517, guid: 25b285b67a40f7849835f83f15ee8140, type: 3}
       propertyPath: dialogues.Array.data[0].sentences.Array.data[1]
       value: I've reached the conclusion that the best way to solve problems is running
-        from them, so I've decided to *close the Zoomedy Club* forever.
+        from them, so I've decided to <b>close the Zoomedy Club</b> forever.
       objectReference: {fileID: 0}
     - target: {fileID: 7742244178084048517, guid: 25b285b67a40f7849835f83f15ee8140, type: 3}
       propertyPath: dialogues.Array.data[0].sentences.Array.data[2]
@@ -665,7 +665,7 @@ PrefabInstance:
     - target: {fileID: 7742244178084048517, guid: 25b285b67a40f7849835f83f15ee8140, type: 3}
       propertyPath: dialogues.Array.data[1].sentences.Array.data[1]
       value: I've reached the conclusion that the best way to solve problems is running
-        from them, so I've decided to *close the Zoomedy Club* forever.
+        from them, so I've decided to <b>close the Zoomedy Club</b> forever.
       objectReference: {fileID: 0}
     - target: {fileID: 7742244178084048517, guid: 25b285b67a40f7849835f83f15ee8140, type: 3}
       propertyPath: dialogues.Array.data[1].sentences.Array.data[2]
