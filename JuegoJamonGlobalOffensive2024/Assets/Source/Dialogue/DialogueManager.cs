@@ -30,11 +30,13 @@ public class DialogueManager : MonoBehaviour
             sentences.Enqueue(sentence);
         }
         DisplayNextSentence();
+        AudioManager.Instance.PlayVoice(Character.MrK, Random.Range(0, 6));
     }
     
 
     public void DisplayNextSentence()
     {
+        AudioManager.Instance.StopVoice();
         if(sentences.Count == 0) 
         {
             EndDialogue();
