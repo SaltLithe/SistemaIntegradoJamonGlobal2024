@@ -166,10 +166,10 @@ public class PanelControl : MonoBehaviour
 
     private void PressBateria()
     {
-        if(!_showActive) 
-        {
-            return;
-        }
+        //if(!_showActive) 
+        //{
+        //    return;
+        //}
         if (_currentLine.GetLineType() == E_LineType.DRUMS)
         {
             if ((_currentLineCounter > _currentLine.GetEventStamp() - .5f &&
